@@ -19,6 +19,8 @@
     <section id="user-goal">
       <h2>My Course Goal</h2>
       <p v-for="goal in courseGoals">{{ goal }}</p>
+      <p><a :href="vueLink">Vue link</a></p>
+      <p>{{ randomOutput() }}</p>
     </section>
   </body>
 </html>
