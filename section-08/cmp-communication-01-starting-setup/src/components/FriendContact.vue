@@ -1,5 +1,5 @@
 <template>
-  <li :style="{ backgroundColor: isFavorite ? 'yellow' : 'white' }">
+  <li :style="{ backgroundColor: isFavorite ? 'lightpink' : 'white' }">
     <h2>{{ name }}</h2>
     <button @click="toggleDetails">
       {{ detailsAreVisible ? "Hide" : "Show" }} Details
@@ -17,6 +17,7 @@
         {{ emailAddress }}
       </li>
     </ul>
+    <button @click="$emit('delete-friend', id)">Delete Friend</button>
   </li>
 </template>
 
@@ -29,7 +30,7 @@ export default {
     emailAddress: String,
     isFavorite: Boolean,
   },
-  emits: ["toggle-favorite"],
+  emits: ["toggle-favorite", "delete-friend"],
   data() {
     return {
       detailsAreVisible: false,
