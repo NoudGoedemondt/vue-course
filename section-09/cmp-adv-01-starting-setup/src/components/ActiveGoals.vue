@@ -1,3 +1,3 @@
 <template>
-  <h3>Active Goals</h3>
+  <h3>Active goals</h3>
 </template>
