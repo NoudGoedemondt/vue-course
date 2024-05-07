@@ -45,13 +45,22 @@ export default {
   },
   methods: {
     submitResource() {
-      this.$emit('resource-added', this.newResource);
+      if (
+        this.newResource.title === '' ||
+        this.newResource.description === '' ||
+        this.newResource.link === ''
+      ) {
+        console.log('error!');
+        return;
+      }
 
-      //TODO: Fix form fields clearing after submit
-      // this.newResource.id = '';
-      // this.newResource.title = '';
-      // this.newResource.description = '';
-      // this.newResource.link = '';
+      this.$emit('resource-added', this.newResource);
+      this.newResource = {
+        id: '',
+        title: '',
+        description: '',
+        link: '',
+      };
     },
   },
 };
