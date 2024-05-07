@@ -12,7 +12,11 @@
     >
   </base-card>
   <keep-alive>
-    <component :is="selectedTab" @resource-added="addResource"></component>
+    <component
+      :is="selectedTab"
+      @resource-added="addResource"
+      @delete-resource="deleteResource"
+    ></component>
   </keep-alive>
 </template>
 
@@ -57,7 +61,19 @@ export default {
       newResource.id = new Date().toISOString();
       this.storedResources.unshift(newResource);
       this.selectedTab = 'stored-resources';
-      console.log('Added new resource:', newResource);
+      console.log(`Added new Resource with id: ${newResource.id}`);
+    },
+    deleteResource(resId) {
+      const index = this.storedResources.findIndex(
+        (resource) => resource.id === resId
+      );
+      if (index !== -1) {
+        this.storedResources.splice(index, 1);
+      } else {
+        console.log(
+          `Resource with id: ${resId} not found in stored Resources.`
+        );
+      }
     },
   },
 };

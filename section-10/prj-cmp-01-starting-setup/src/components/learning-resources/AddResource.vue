@@ -1,4 +1,13 @@
 <template>
+  <base-dialog v-if="showDialog" title="Invalid Input" @close="closeDialog">
+    <template #default>
+      <p>Unfortunately, at least one input value is invalid.</p>
+      <p>Please check the input fields for errors.</p>
+    </template>
+    <template #actions>
+      <base-button @click="closeDialog">Okay</base-button>
+    </template>
+  </base-dialog>
   <base-card>
     <form @submit.prevent="submitResource">
       <div class="form-control">
@@ -41,6 +50,7 @@ export default {
         description: '',
         link: '',
       },
+      showDialog: false,
     };
   },
   methods: {
@@ -50,7 +60,7 @@ export default {
         this.newResource.description === '' ||
         this.newResource.link === ''
       ) {
-        console.log('error!');
+        this.showDialog = true;
         return;
       }
 
@@ -61,6 +71,9 @@ export default {
         description: '',
         link: '',
       };
+    },
+    closeDialog() {
+      this.showDialog = false;
     },
   },
 };

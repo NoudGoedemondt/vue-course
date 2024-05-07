@@ -3,9 +3,11 @@
     <learning-resource
       v-for="resource in resources"
       :key="resource.id"
+      :id="resource.id"
       :title="resource.title"
       :description="resource.description"
       :link="resource.link"
+      @delete-resource="handleDeleteResource"
     ></learning-resource>
   </ul>
 </template>
@@ -18,6 +20,12 @@ export default {
     LearningResource,
   },
   inject: ['resources'],
+  emits: ['delete-resource'],
+  methods: {
+    handleDeleteResource(resId) {
+      this.$emit('delete-resource', resId);
+    },
+  },
 };
 </script>
 
