@@ -26,7 +26,14 @@ const router = createRouter({
         },
       ],
     }, // our-domain.com/teams => TeamsList
-    { path: '/users', components: { default: UsersList, footer: UsersFooter } },
+    {
+      path: '/users',
+      components: { default: UsersList, footer: UsersFooter },
+      beforeEnter(to, from, next) {
+        console.log(to, from);
+        next();
+      },
+    },
     { path: '/:notFound(.*)', component: NotFound },
   ],
   linkActiveClass: 'active',
