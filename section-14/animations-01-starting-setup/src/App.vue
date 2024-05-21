@@ -63,7 +63,7 @@ button:active {
   height: 8rem;
   background-color: #290033;
   margin-bottom: 2rem;
-  transition: transform 0.3s ease-out;
+  /* transition: transform 0.3s ease-out; */
 }
 .container {
   max-width: 40rem;
@@ -77,10 +77,18 @@ button:active {
   border-radius: 12px;
 }
 .animate {
-  transform: translateX(-150px);
+  animation: slide-fade 0.3s ease-out forwards;
+  /* transform: translateX(-150px); */
 }
 @keyframes slide-fade {
   0% {
+    transform: translateX(0) scale(1);
+  }
+  50% {
+    transform: translateX(-75px) scale(1.1);
+  }
+  100% {
+    transform: translateX(-150px) scale(1);
   }
 }
 </style>
