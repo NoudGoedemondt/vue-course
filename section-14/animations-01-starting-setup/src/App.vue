@@ -1,13 +1,15 @@
 <template>
-  <base-popup v-if="popupIsVisible" @close="hidePopup">
-    <h3>Test Popup</h3>
-  </base-popup>
+  <transition name="popup">
+    <base-popup v-if="popupIsVisible" @close="hidePopup">
+      <h3>Test Popup</h3>
+    </base-popup>
+  </transition>
   <div class="container">
     <div class="block" :class="{ animate: animatedBlock }"></div>
     <button @click="animateBlock">Animate</button>
   </div>
   <div class="container">
-    <transition>
+    <transition name="para">
       <p v-if="paragraphIsVisible">This is only visible sometimes...</p>
     </transition>
     <button @click="toggleParagraph">Toggle Paragraph</button>
@@ -103,32 +105,39 @@ button:active {
   /* animation: slide-fade 0.3s ease-out forwards; */
   transform: translateX(-150px);
 }
-.v-enter-from {
-  opacity: 0;
-  transform: translateY(-30px);
+
+.para-enter-active,
+.para-leave-active {
+  animation: slide-scale 0.3s ease-out;
 }
-.v-leave-to {
-  opacity: 0;
-  transform: translateY(30px);
+.para-leave-active {
+  animation-direction: reverse;
 }
-.v-enter-active,
-.v-leave-active {
-  transition: all 0.3s ease-out;
+
+.popup-enter-from,
+.popup-leave-to {
+  transform: translateX(200px);
 }
-.v-enter-to,
-.v-leave-from {
-  opacity: 1;
-  transform: translateY(0);
+
+.popup-enter-active,
+.popup-leave-active {
+  transition: all 0.2s ease-in;
 }
-@keyframes slide-fade {
+
+.popup-enter-to,
+.popup-leave-from {
+  transform: translateX(0);
+}
+
+@keyframes slide-scale {
   0% {
-    transform: translateX(0) scale(1);
+    transform: translateY(-100px) scale(0.5);
   }
   50% {
-    transform: translateX(-75px) scale(1.1);
+    transform: translateY(-50px) scale(0.7);
   }
   100% {
-    transform: translateX(-150px) scale(1);
+    transform: translateY(0px) scale(1);
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <div v-if="visible" class="popup" :class="{ 'popup-out': closing }">
-    <button class="close-button" @click="closePopup">&times;</button>
+  <div class="popup">
+    <button class="close-button" @click="$emit('close')">&times;</button>
     <div class="slot-wrapper">
       <slot></slot>
     </div>
@@ -10,21 +10,6 @@
 <script>
 export default {
   emits: ['close'],
-  data() {
-    return {
-      visible: true,
-      closing: false,
-    };
-  },
-  methods: {
-    closePopup() {
-      this.closing = true;
-      setTimeout(() => {
-        this.visible = false;
-        this.$emit('close');
-      }, 300); // Duration of the out animation
-    },
-  },
 };
 </script>
 
@@ -58,34 +43,5 @@ button {
   border-radius: 15px;
   background-color: lightgray;
   max-width: 200px;
-  animation: popup-in 0.3s ease-in forwards;
-}
-
-.popup-out {
-  animation: popup-out 0.3s ease-out forwards;
-}
-
-@keyframes popup-in {
-  0% {
-    transform: translateX(200px);
-  }
-  30% {
-    transform: translateX(-20px);
-  }
-  100% {
-    transform: translateX(0px);
-  }
-}
-
-@keyframes popup-out {
-  0% {
-    transform: translateX(0px);
-  }
-  30% {
-    transform: translateX(-20px);
-  }
-  100% {
-    transform: translateX(200px);
-  }
 }
 </style>
