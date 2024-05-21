@@ -1,14 +1,17 @@
 <template>
-  <div class="popup">
-    <button class="close-button" @click="$emit('close')">&times;</button>
-    <div class="slot-wrapper">
-      <slot></slot>
+  <transition name="popup">
+    <div class="popup" v-if="open">
+      <button class="close-button" @click="$emit('close')">&times;</button>
+      <div class="slot-wrapper">
+        <slot></slot>
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
 export default {
+  props: ['open'],
   emits: ['close'],
 };
 </script>
@@ -26,14 +29,11 @@ button {
   font-size: 30px;
   margin: 0 1rem;
 }
-
 .slot-wrapper {
-  margin: 0 1rem;
+  margin-right: 1rem;
 }
-
 .popup {
   display: flex;
-  align-content: space-between;
   position: absolute;
   top: 0;
   right: 0;
@@ -41,7 +41,19 @@ button {
   margin-top: 2rem;
   margin-right: 1rem;
   border-radius: 15px;
-  background-color: lightgray;
-  max-width: 200px;
+  background-color: #810032;
+  color: white;
+}
+.popup-enter-from,
+.popup-leave-to {
+  transform: translateX(200px);
+}
+.popup-enter-active,
+.popup-leave-active {
+  transition: all 0.2s ease-in;
+}
+.popup-enter-to,
+.popup-leave-from {
+  transform: translateX(0);
 }
 </style>

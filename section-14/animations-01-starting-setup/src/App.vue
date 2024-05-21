@@ -1,9 +1,7 @@
 <template>
-  <transition name="popup">
-    <base-popup v-if="popupIsVisible" @close="hidePopup">
-      <h3>Test Popup</h3>
-    </base-popup>
-  </transition>
+  <base-popup @close="hidePopup" :open="popupIsVisible">
+    <p>This is a test!</p>
+  </base-popup>
   <div class="container">
     <div class="block" :class="{ animate: animatedBlock }"></div>
     <button @click="animateBlock">Animate</button>
@@ -14,7 +12,7 @@
     </transition>
     <button @click="toggleParagraph">Toggle Paragraph</button>
   </div>
-  <base-modal @close="hideDialog" v-if="dialogIsVisible">
+  <base-modal @close="hideDialog" :open="dialogIsVisible">
     <p>This is a test dialog!</p>
     <button @click="hideDialog">Close it!</button>
   </base-modal>
@@ -112,21 +110,6 @@ button:active {
 }
 .para-leave-active {
   animation-direction: reverse;
-}
-
-.popup-enter-from,
-.popup-leave-to {
-  transform: translateX(200px);
-}
-
-.popup-enter-active,
-.popup-leave-active {
-  transition: all 0.2s ease-in;
-}
-
-.popup-enter-to,
-.popup-leave-from {
-  transform: translateX(0);
 }
 
 @keyframes slide-scale {
