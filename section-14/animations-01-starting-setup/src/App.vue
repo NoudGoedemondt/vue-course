@@ -1,4 +1,7 @@
 <template>
+  <base-popup v-if="popupIsVisible" @close="hidePopup">
+    <h3>Test Popup</h3>
+  </base-popup>
   <div class="container">
     <div class="block" :class="{ animate: animatedBlock }"></div>
     <button @click="animateBlock">Animate</button>
@@ -10,12 +13,16 @@
   <div class="container">
     <button @click="showDialog">Show Dialog</button>
   </div>
+  <div class="container">
+    <button @click="showPopup">Show Popup</button>
+  </div>
 </template>
 
 <script>
 export default {
   data() {
     return {
+      popupIsVisible: false,
       animatedBlock: false,
       dialogIsVisible: false,
     };
@@ -29,6 +36,12 @@ export default {
     },
     hideDialog() {
       this.dialogIsVisible = false;
+    },
+    showPopup() {
+      this.popupIsVisible = true;
+    },
+    hidePopup() {
+      this.popupIsVisible = false;
     },
   },
 };
@@ -63,7 +76,7 @@ button:active {
   height: 8rem;
   background-color: #290033;
   margin-bottom: 2rem;
-  /* transition: transform 0.3s ease-out; */
+  transition: transform 0.3s ease-out;
 }
 .container {
   max-width: 40rem;
@@ -77,8 +90,8 @@ button:active {
   border-radius: 12px;
 }
 .animate {
-  animation: slide-fade 0.3s ease-out forwards;
-  /* transform: translateX(-150px); */
+  /* animation: slide-fade 0.3s ease-out forwards; */
+  transform: translateX(-150px);
 }
 @keyframes slide-fade {
   0% {
