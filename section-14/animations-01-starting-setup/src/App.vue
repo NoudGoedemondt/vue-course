@@ -103,6 +103,23 @@ button:active {
   /* animation: slide-fade 0.3s ease-out forwards; */
   transform: translateX(-150px);
 }
+.v-enter-from {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+.v-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.v-enter-active,
+.v-leave-active {
+  transition: all 0.3s ease-out;
+}
+.v-enter-to,
+.v-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
 @keyframes slide-fade {
   0% {
     transform: translateX(0) scale(1);
