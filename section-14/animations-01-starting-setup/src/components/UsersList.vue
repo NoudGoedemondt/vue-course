@@ -138,7 +138,7 @@ input {
 .user-list-enter-to,
 .user-list-leave-from {
   opacity: 1;
-  transform: translateX(0);
+  scale: 1;
 }
 
 .user-list-leave-active {
@@ -147,6 +147,10 @@ input {
 
 .user-list-leave-to {
   opacity: 0;
-  transform: translateX(50px);
+  scale: 0;
+}
+
+.user-list-move {
+  transition: transform 1s ease;
 }
 </style>
