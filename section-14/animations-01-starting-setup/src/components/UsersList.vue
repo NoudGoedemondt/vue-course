@@ -1,10 +1,10 @@
 <template>
-  <ul>
+  <transition-group tag="ul" name="user-list">
     <li v-for="user in users" :key="user.id" @click="removeUser(user.id)">
       <h3>{{ user.firstname + ' ' + user.lastname }}</h3>
       <p>{{ user.position }}</p>
     </li>
-  </ul>
+  </transition-group>
   <form @submit.prevent="addUser">
     <div class="form-group">
       <label for="firstname">Name:</label>
@@ -124,5 +124,29 @@ input {
 .button-container {
   display: flex;
   justify-content: center;
+}
+
+.user-list-enter-from {
+  opacity: 0;
+  transform: translateX(-50px);
+}
+
+.user-list-enter-active {
+  transition: all 1s ease-in;
+}
+
+.user-list-enter-to,
+.user-list-leave-from {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.user-list-leave-active {
+  transition: all 1s ease-out;
+}
+
+.user-list-leave-to {
+  opacity: 0;
+  transform: translateX(50px);
 }
 </style>
