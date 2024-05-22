@@ -73,7 +73,7 @@ dialog {
     opacity: 0;
   }
   to {
-    opacity: 0.75;
+    opacity: 1;
   }
 }
 </style>

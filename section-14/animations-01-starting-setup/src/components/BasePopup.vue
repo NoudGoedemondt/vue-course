@@ -50,7 +50,7 @@ button {
 }
 .popup-enter-active,
 .popup-leave-active {
-  transition: all 0.2s ease-in;
+  transition: all 0.4s ease-in-out;
 }
 .popup-enter-to,
 .popup-leave-from {
