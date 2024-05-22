@@ -1,4 +1,7 @@
 <template>
+  <div class="container">
+    <users-list></users-list>
+  </div>
   <base-popup @close="hidePopup" :open="popupIsVisible">
     <p>This is a test!</p>
   </base-popup>
@@ -41,7 +44,12 @@
 </template>
 
 <script>
+import UsersList from './components/UsersList.vue';
+
 export default {
+  components: {
+    UsersList,
+  },
   data() {
     return {
       popupIsVisible: false,
