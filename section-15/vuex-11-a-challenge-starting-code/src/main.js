@@ -1,31 +1,9 @@
 import { createApp } from 'vue';
-import { createStore } from 'vuex';
 
+import store from './store.js';
 import router from './router.js';
 import App from './App.vue';
 import BaseBadge from './components/ui/BaseBadge.vue';
-
-const store = createStore({
-  state() {
-    return {
-      isLoggedIn: false,
-    };
-  },
-  mutations: {
-    SET_LOGGED_IN(state, status) {
-      state.isLoggedIn = status;
-    },
-  },
-  actions: {
-    logIn(context) {
-      context.commit('SET_LOGGED_IN', true);
-    },
-    logOut(context) {
-      context.commit('SET_LOGGED_IN', false);
-    },
-  },
-  getters: {},
-});
 
 const app = createApp(App);
 
