@@ -16,11 +16,14 @@
 
 <script>
 import ProductItem from '../components/products/ProductItem.vue';
+import { mapState } from 'vuex';
 
 export default {
-  inject: ['products'],
   components: {
     ProductItem,
+  },
+  computed: {
+    ...mapState(['products']),
   },
 };
 </script>
