@@ -1,13 +1,28 @@
 <template>
-  <h1>{{ msg }}</h1>
+  <the-header />
+  <router-view />
 </template>
 
 <script>
+import TheHeader from './components/UI/TheHeader.vue';
+
 export default {
-  data() {
-    return {
-      msg: 'Hello World',
-    };
+  components: {
+    TheHeader,
   },
 };
 </script>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0;
+}
+</style>
