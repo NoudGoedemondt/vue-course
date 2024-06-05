@@ -8,6 +8,8 @@
 <style scoped>
 header {
   text-align: center;
+  border-bottom: 1px solid lightgray;
+  padding: 1rem;
 }
 
 a {
