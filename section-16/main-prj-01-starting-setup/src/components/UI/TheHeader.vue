@@ -23,6 +23,16 @@ header {
   padding: 1rem;
 }
 
+nav > ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+}
+
+h2 {
+  margin: 0;
+}
+
 a {
   margin: 1rem;
   padding: 0.5rem;
@@ -30,20 +40,10 @@ a {
   color: black;
 }
 
-a:active,
-a:hover,
-a.router-link-active {
+li a:active,
+li a:hover,
+li a.router-link-active {
   outline: 1px solid lightgray;
   border-radius: 5px;
-}
-
-h2 {
-  margin: 0;
-}
-
-ul {
-  display: flex;
-  justify-content: center;
-  list-style: none;
 }
 </style>
