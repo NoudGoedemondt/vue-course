@@ -40,4 +40,8 @@ export default {
   flex-direction: column;
   align-items: center;
 }
+
+.no-coaches {
+  margin-top: 2rem;
+}
 </style>
