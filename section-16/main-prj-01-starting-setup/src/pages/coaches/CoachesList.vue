@@ -41,7 +41,7 @@ export default {
         {
           id: 'c3',
           firstName: 'Henk',
-          lastName: 'Spermatank',
+          lastName: 'Janse',
           description:
             'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore odio, nemo, temporibus, quae minus magnam blanditiis repellat beatae hic accusamus aperiam eum maxime ab. Ad voluptas accusantium excepturi eius fuga.',
           rate: 99.99,

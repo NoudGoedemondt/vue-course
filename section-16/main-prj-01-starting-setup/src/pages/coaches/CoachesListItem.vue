@@ -37,7 +37,7 @@ export default {
 
 <style>
 .coach-item {
-  outline: auto lightgray 1px;
+  border: 1px solid lightgray;
   border-radius: 5px;
   padding: 1rem;
   margin: 0.5rem;
