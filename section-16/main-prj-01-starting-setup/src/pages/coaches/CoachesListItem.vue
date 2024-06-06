@@ -37,7 +37,7 @@ export default {
 
 <style>
 .coach-item {
-  border: 1px solid lightgray;
+  outline: 1px solid lightgray;
   border-radius: 5px;
   padding: 1rem;
   margin: 0.5rem;
@@ -52,5 +52,6 @@ export default {
 .coach-item-details-link {
   cursor: pointer;
   text-decoration: underline;
+  color: blue;
 }
 </style>
