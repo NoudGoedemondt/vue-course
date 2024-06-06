@@ -1,12 +1,18 @@
 <template>
   <div class="coach-item">
-    <div>
+    <div class="coach-item-head">
       <h3>{{ firstName + ' ' + lastName }}</h3>
-      <h4>${{ rate }}/hr</h4>
+      <ul>
+        <base-badge
+          v-for="area in areas"
+          :key="area"
+          :text="area"
+          :type="area"
+        />
+      </ul>
     </div>
-    <div class="coach-item-description" v-if="showDetails">
-      <p>{{ description }}</p>
-    </div>
+    <h4>${{ rate }}/hr</h4>
+    <p class="coach-item-description" v-if="showDetails">{{ description }}</p>
     <p class="coach-item-details-link" @click="toggleDetails">
       {{ showDetails ? 'Hide Details' : 'Show Details' }}
     </p>
@@ -19,6 +25,7 @@ export default {
     id: String,
     firstName: String,
     lastName: String,
+    areas: Array,
     description: String,
     rate: Number,
   },
@@ -35,7 +42,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .coach-item {
   outline: 1px solid lightgray;
   border-radius: 5px;
@@ -43,6 +50,22 @@ export default {
   margin: 0.5rem;
   width: 80vw;
   max-width: 1042px;
+}
+
+.coach-item-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.coach-item-head h3 {
+  flex-shrink: 0;
+}
+
+.coach-item-head ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
 }
 
 .coach-item-description {
