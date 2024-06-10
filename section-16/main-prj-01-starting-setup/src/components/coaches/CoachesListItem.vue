@@ -14,11 +14,11 @@
     <div class="coach-item-body">
       <h4>${{ rate }}/hr</h4>
       <p v-if="showDetails">{{ description }}</p>
+    </div>
+    <div class="coach-item-actions">
       <a @click="toggleDetails">
         {{ showDetails ? 'Hide Details' : 'Show Details' }}
       </a>
-    </div>
-    <div class="coach-item-actions">
       <router-link :to="coachContactLink">Contact >></router-link>
     </div>
   </div>
@@ -99,6 +99,6 @@ export default {
 .coach-item-actions {
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: space-between;
 }
 </style>
