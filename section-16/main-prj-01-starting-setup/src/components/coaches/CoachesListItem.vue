@@ -1,7 +1,7 @@
 <template>
   <div class="coach-item">
     <div class="coach-item-head">
-      <h3>{{ firstName + ' ' + lastName }}</h3>
+      <h2>{{ fullName }}</h2>
       <ul>
         <base-badge
           v-for="area in areas"
@@ -11,11 +11,17 @@
         />
       </ul>
     </div>
-    <h4>${{ rate }}/hr</h4>
-    <p class="coach-item-description" v-if="showDetails">{{ description }}</p>
-    <p class="coach-item-details-link" @click="toggleDetails">
-      {{ showDetails ? 'Hide Details' : 'Show Details' }}
-    </p>
+    <div class="coach-item-body">
+      <h4>${{ rate }}/hr</h4>
+      <p v-if="showDetails">{{ description }}</p>
+      <a @click="toggleDetails">
+        {{ showDetails ? 'Hide Details' : 'Show Details' }}
+      </a>
+    </div>
+    <div class="coach-item-actions">
+      <base-button :link="null" :mode="null">Test</base-button>
+      <router-link :to="coachContactLink">Contact</router-link>
+    </div>
   </div>
 </template>
 
@@ -33,6 +39,14 @@ export default {
     return {
       showDetails: false,
     };
+  },
+  computed: {
+    fullName() {
+      return this.firstName + ' ' + this.lastName;
+    },
+    coachContactLink() {
+      return this.$route.path + '/' + this.id + '/contact';
+    },
   },
   methods: {
     toggleDetails() {
@@ -58,7 +72,7 @@ export default {
   justify-content: space-between;
 }
 
-.coach-item-head h3 {
+.coach-item-head h2 {
   flex-shrink: 0;
 }
 
@@ -68,11 +82,15 @@ export default {
   justify-content: end;
 }
 
-.coach-item-description {
+.coach-item-body {
   margin: 1rem 0;
 }
 
-.coach-item-details-link {
+.coach-item h4 {
+  margin-bottom: 1rem;
+}
+
+.coach-item-body a {
   cursor: pointer;
   text-decoration: underline;
   color: blue;

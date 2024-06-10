@@ -18,7 +18,7 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex';
-import CoachesListItem from './CoachesListItem.vue';
+import CoachesListItem from '../components/coaches/CoachesListItem.vue';
 
 export default {
   components: {
