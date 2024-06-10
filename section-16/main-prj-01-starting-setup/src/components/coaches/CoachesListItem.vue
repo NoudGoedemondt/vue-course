@@ -19,8 +19,7 @@
       </a>
     </div>
     <div class="coach-item-actions">
-      <base-button :link="null" :mode="null">Test</base-button>
-      <router-link :to="coachContactLink">Contact</router-link>
+      <router-link :to="coachContactLink">Contact >></router-link>
     </div>
   </div>
 </template>
@@ -86,13 +85,20 @@ export default {
   margin: 1rem 0;
 }
 
-.coach-item h4 {
+.coach-item-body h4 {
   margin-bottom: 1rem;
 }
 
-.coach-item-body a {
+.coach-item-body a,
+.coach-item-actions a {
   cursor: pointer;
   text-decoration: underline;
   color: blue;
+}
+
+.coach-item-actions {
+  display: flex;
+  align-items: center;
+  justify-content: end;
 }
 </style>

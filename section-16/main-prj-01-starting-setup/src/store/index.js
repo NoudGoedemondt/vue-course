@@ -31,6 +31,24 @@ const store = createStore({
             'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore odio, nemo, temporibus, quae minus magnam blanditiis repellat beatae hic accusamus aperiam eum maxime ab. Ad voluptas accusantium excepturi eius fuga.',
           rate: 99.99,
         },
+        {
+          id: 'c4',
+          firstName: 'John',
+          lastName: 'Doe',
+          areas: ['frontend'],
+          description:
+            'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore odio, nemo, temporibus, quae minus magnam blanditiis repellat beatae hic accusamus aperiam eum maxime ab. Ad voluptas accusantium excepturi eius fuga.',
+          rate: 19.99,
+        },
+        {
+          id: 'c5',
+          firstName: 'Jane',
+          lastName: 'Johnson',
+          areas: ['frontend'],
+          description:
+            'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore odio, nemo, temporibus, quae minus magnam blanditiis repellat beatae hic accusamus aperiam eum maxime ab. Ad voluptas accusantium excepturi eius fuga.',
+          rate: 19.99,
+        },
       ],
     };
   },
