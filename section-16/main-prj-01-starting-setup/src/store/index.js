@@ -56,6 +56,9 @@ const store = createStore({
     hasCoaches(state) {
       return state.coaches && state.coaches.length > 0;
     },
+    getCoachById: (state) => (id) => {
+      return state.coaches.find((coach) => coach.id === id);
+    },
   },
 });
 
