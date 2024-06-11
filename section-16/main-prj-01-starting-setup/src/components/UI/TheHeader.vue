@@ -10,7 +10,7 @@
           <router-link to="/requests">Requests</router-link>
         </li>
         <li>
-          <router-link to="'/register'">Register</router-link>
+          <router-link to="/register">Register</router-link>
         </li>
       </ul>
     </nav>
