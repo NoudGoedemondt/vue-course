@@ -59,6 +59,11 @@ const store = createStore({
     getCoachById: (state) => (id) => {
       return state.coaches.find((coach) => coach.id === id);
     },
+    filteredCoaches: (state) => (selectedAreas) => {
+      return state.coaches.filter((coach) =>
+        selectedAreas.every((area) => coach.areas.includes(area))
+      );
+    },
   },
 });
 

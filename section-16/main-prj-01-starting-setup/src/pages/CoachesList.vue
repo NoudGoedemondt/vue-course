@@ -1,4 +1,5 @@
 <template>
+  <coach-filter v-if="hasCoaches" @enableFilters="filterCoaches" />
   <div v-if="hasCoaches" class="coaches">
     <coaches-list-item
       v-for="coach in coaches"
@@ -19,16 +20,27 @@
 <script>
 import { mapState, mapGetters } from 'vuex';
 import CoachesListItem from '../components/coaches/CoachesListItem.vue';
+import CoachFilter from '../components/coaches/CoachFilter.vue';
 
 export default {
   components: {
     CoachesListItem,
+    CoachFilter,
   },
   computed: {
     ...mapState({
       coaches: (state) => state.coaches,
     }),
     ...mapGetters(['hasCoaches']),
+    //   ...mapGetters(['filteredCoaches']),
+    //   coaches() {
+    //     return this.filteredCoaches(this.activeFilters);
+    //   },
+  },
+  methods: {
+    filterCoaches(filters) {
+      console.log(filters);
+    },
   },
 };
 </script>
