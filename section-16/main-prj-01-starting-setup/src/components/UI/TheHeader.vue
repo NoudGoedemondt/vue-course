@@ -9,6 +9,9 @@
         <li>
           <router-link to="/requests">Requests</router-link>
         </li>
+        <li>
+          <router-link to="'/register'">Register</router-link>
+        </li>
       </ul>
     </nav>
   </header>
@@ -26,6 +29,7 @@ header {
 nav > ul {
   display: flex;
   justify-content: center;
+  align-items: center;
   list-style: none;
 }
 
@@ -34,7 +38,7 @@ h2 {
 }
 
 a {
-  margin: 1rem;
+  margin: 0 1rem;
   padding: 0.5rem;
   text-decoration: none;
   color: black;
