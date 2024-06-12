@@ -62,7 +62,7 @@ export default {
   padding: 1rem;
   margin: 0.5rem;
   width: 80vw;
-  max-width: 1042px;
+  max-width: 1024px;
 }
 
 .coach-item-head {

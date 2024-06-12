@@ -52,7 +52,7 @@ form {
   padding: 1rem;
   margin: 0.5rem auto;
   width: 80vw;
-  max-width: 1042px;
+  max-width: 768px;
   text-align: center;
 }
 
