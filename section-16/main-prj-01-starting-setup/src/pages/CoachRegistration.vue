@@ -3,32 +3,59 @@
     <h3>Register as a Coach</h3>
     <div class="form-control">
       <label for="firstName">First name</label>
-      <input type="text" id="firstName" />
+      <input type="text" id="firstName" v-model="coachRegistration.firstName" />
     </div>
     <div class="form-control">
       <label for="lastName">Last name</label>
-      <input type="text" id="lastName" />
+      <input type="text" id="lastName" v-model="coachRegistration.lastName" />
     </div>
     <div class="form-control">
       <label for="description">Description</label>
-      <textarea id="description" rows="4" cols="40"></textarea>
+      <textarea
+        id="description"
+        rows="4"
+        cols="21"
+        v-model="coachRegistration.description"
+      ></textarea>
     </div>
     <div class="form-control">
       <label for="rate">Rate</label>
-      <input type="number" id="rate" min="0.01" step="0.01" max="1000" />
+      <input
+        type="number"
+        id="rate"
+        min="0.01"
+        step="0.01"
+        max="1000"
+        v-model="coachRegistration.rate"
+      />
     </div>
     <div class="form-control expertises">
       <div class="form-control-group">
         <label for="frontend">Frontend</label>
-        <input id="frontend" type="checkbox" value="frontend" />
+        <input
+          id="frontend"
+          type="checkbox"
+          value="frontend"
+          v-model="coachRegistration.areas"
+        />
       </div>
       <div class="form-control-group">
         <label for="backend">Backend</label>
-        <input id="backend" type="checkbox" value="backend" />
+        <input
+          id="backend"
+          type="checkbox"
+          value="backend"
+          v-model="coachRegistration.areas"
+        />
       </div>
       <div class="form-control-group">
         <label for="career">Career</label>
-        <input id="career" type="checkbox" value="career" />
+        <input
+          id="career"
+          type="checkbox"
+          value="career"
+          v-model="coachRegistration.areas"
+        />
       </div>
     </div>
     <div class="form-control submit-button">
@@ -39,8 +66,26 @@
 
 <script>
 export default {
+  data() {
+    return {
+      coachRegistration: {
+        id: '',
+        firstName: '',
+        lastName: '',
+        areas: [],
+        description: '',
+        rate: null,
+      },
+    };
+  },
   methods: {
-    submitForm() {},
+    submitForm() {
+      console.log(this.coachRegistration.firstName);
+      console.log(this.coachRegistration.lastName);
+      console.log(this.coachRegistration.areas);
+      console.log(this.coachRegistration.description);
+      console.log(this.coachRegistration.rate);
+    },
   },
 };
 </script>
@@ -51,7 +96,7 @@ form {
   border-radius: 5px;
   padding: 1rem;
   margin: 0.5rem auto;
-  width: 80vw;
+  width: 60vw;
   max-width: 768px;
   text-align: center;
 }
