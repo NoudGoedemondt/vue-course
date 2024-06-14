@@ -52,6 +52,16 @@ const store = createStore({
       ],
     };
   },
+  mutations: {
+    ADD_COACH(state, coachData) {
+      state.coaches.unshift(coachData);
+    },
+  },
+  actions: {
+    addCoach(context, coachData) {
+      context.commit('ADD_COACH', coachData);
+    },
+  },
   getters: {
     hasCoaches(state) {
       return state.coaches && state.coaches.length > 0;
