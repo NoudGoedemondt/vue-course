@@ -26,7 +26,7 @@ const store = createStore({
           id: 'c3',
           firstName: 'Henk',
           lastName: 'Janse',
-          areas: ['frontend', 'backend', 'career'],
+          areas: ['frontend', 'backend'],
           description:
             'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore odio, nemo, temporibus, quae minus magnam blanditiis repellat beatae hic accusamus aperiam eum maxime ab. Ad voluptas accusantium excepturi eius fuga.',
           rate: 99.99,
