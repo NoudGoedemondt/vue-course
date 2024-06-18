@@ -23,7 +23,7 @@ header {
   justify-content: space-around;
   align-items: center;
   border-bottom: 1px solid lightgray;
-  padding: 1rem;
+  padding: 1rem 0;
 }
 
 nav > ul {
