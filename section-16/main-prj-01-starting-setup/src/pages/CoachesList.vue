@@ -70,7 +70,7 @@ export default {
 }
 .list-enter-from,
 .list-leave-to {
-  scale: 0%;
+  scale: 80%;
   opacity: 0;
 }
 
