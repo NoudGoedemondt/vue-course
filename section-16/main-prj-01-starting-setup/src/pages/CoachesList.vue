@@ -35,8 +35,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['hasCoaches']),
-    ...mapGetters(['filteredCoaches']),
+    ...mapGetters(['filteredCoaches', 'hasCoaches']),
     coaches() {
       return this.filteredCoaches(this.activeFilters);
     },
@@ -61,13 +60,18 @@ export default {
   margin-top: 2rem;
 }
 
+.list-move,
 .list-enter-active,
 .list-leave-active {
-  transition: all 0.5s ease-in;
+  transition: all 0.5s ease;
 }
 .list-enter-from,
 .list-leave-to {
-  scale: 80%;
+  scale: 0%;
   opacity: 0;
+}
+
+.list-leave-active {
+  position: absolute;
 }
 </style>
