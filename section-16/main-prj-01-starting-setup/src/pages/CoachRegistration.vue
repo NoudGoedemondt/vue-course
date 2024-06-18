@@ -13,10 +13,11 @@ export default {
   methods: {
     ...mapActions(['addCoach']),
     addNewCoach(newCoach) {
-      this.addCoach(newCoach);
+      this.$router.replace('/coaches');
+      setTimeout(() => {
+        this.addCoach(newCoach);
+      }, 100);
     },
   },
 };
 </script>
-
-<style scoped></style>

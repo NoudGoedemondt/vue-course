@@ -1,16 +1,18 @@
 <template>
   <coach-filter v-if="hasCoaches" @enableFilters="setFilters" />
   <div v-if="hasCoaches" class="coaches">
-    <coaches-list-item
-      v-for="coach in coaches"
-      :key="coach.id"
-      :id="coach.id"
-      :firstName="coach.firstName"
-      :lastName="coach.lastName"
-      :areas="coach.areas"
-      :description="coach.description"
-      :rate="coach.rate"
-    />
+    <TransitionGroup name="list" mode="out-in">
+      <coaches-list-item
+        v-for="coach in coaches"
+        :key="coach.id"
+        :id="coach.id"
+        :firstName="coach.firstName"
+        :lastName="coach.lastName"
+        :areas="coach.areas"
+        :description="coach.description"
+        :rate="coach.rate"
+      />
+    </TransitionGroup>
   </div>
   <div v-else class="no-coaches">
     <h3>No coaches found...</h3>
@@ -57,5 +59,15 @@ export default {
 
 .no-coaches {
   margin-top: 2rem;
+}
+
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease-in;
+}
+.list-enter-from,
+.list-leave-to {
+  scale: 80%;
+  opacity: 0;
 }
 </style>
