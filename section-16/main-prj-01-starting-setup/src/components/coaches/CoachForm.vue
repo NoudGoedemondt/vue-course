@@ -125,7 +125,7 @@ export default {
 
       if (
         !this.coachRegistration.rate ||
-        this.coachRegistration.rate <= 0 ||
+        this.coachRegistration.rate < 0 ||
         this.coachRegistration.rate > 1000
       ) {
         this.invalidFields.rate = true;
