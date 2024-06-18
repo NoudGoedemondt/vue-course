@@ -1,7 +1,7 @@
 <template>
   <coach-filter v-if="hasCoaches" @enableFilters="setFilters" />
   <div v-if="hasCoaches" class="coaches">
-    <TransitionGroup name="list" mode="out-in">
+    <TransitionGroup name="list">
       <coaches-list-item
         v-for="coach in coaches"
         :key="coach.id"
