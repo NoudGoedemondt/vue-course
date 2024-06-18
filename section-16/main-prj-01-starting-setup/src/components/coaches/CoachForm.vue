@@ -8,7 +8,7 @@
         id="firstName"
         v-model.trim="coachRegistration.firstName"
         :class="{ invalid: invalidFields.firstName }"
-        @blur="resetValidity('firstName')"
+        @focus="resetValidity('firstName')"
       />
     </div>
     <div class="form-control">
@@ -18,7 +18,7 @@
         id="lastName"
         v-model.trim="coachRegistration.lastName"
         :class="{ invalid: invalidFields.lastName }"
-        @blur="resetValidity('lastName')"
+        @focus="resetValidity('lastName')"
       />
     </div>
     <div class="form-control">
@@ -29,7 +29,7 @@
         cols="30"
         v-model.trim="coachRegistration.description"
         :class="{ invalid: invalidFields.description }"
-        @blur="resetValidity('description')"
+        @focus="resetValidity('description')"
       ></textarea>
     </div>
     <div class="form-control">
@@ -42,7 +42,7 @@
         max="1000"
         v-model.trim="coachRegistration.rate"
         :class="{ invalid: invalidFields.rate }"
-        @blur="resetValidity('rate')"
+        @focus="resetValidity('rate')"
       />
     </div>
     <div
@@ -56,6 +56,7 @@
           type="checkbox"
           value="frontend"
           v-model="coachRegistration.areas"
+          @focus="resetValidity('areas')"
         />
       </div>
       <div class="form-control-group">
@@ -65,6 +66,7 @@
           type="checkbox"
           value="backend"
           v-model="coachRegistration.areas"
+          @focus="resetValidity('areas')"
         />
       </div>
       <div class="form-control-group">
@@ -74,6 +76,7 @@
           type="checkbox"
           value="career"
           v-model="coachRegistration.areas"
+          @focus="resetValidity('areas')"
         />
       </div>
     </div>
