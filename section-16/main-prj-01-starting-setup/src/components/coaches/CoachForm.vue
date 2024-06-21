@@ -161,7 +161,6 @@ export default {
       if (this.validateForm()) {
         this.$emit('form-submitted', { ...this.coachRegistration });
         this.clearForm();
-        this.$router.replace('/coaches');
       }
       //todo: after registering, remove option to register
     },
