@@ -1,10 +1,18 @@
 <template>
-  <h1>ContactCoach</h1>
-  <p>{{ coach.firstName }}</p>
-  <p>{{ coach.lastName }}</p>
-  <p>{{ coach.areas }}</p>
-  <p>{{ coach.description }}</p>
-  <p>{{ coach.rate }}</p>
+  <form @submit.prevent="">
+    <h3>Contact a Coach</h3>
+    <div class="form-control">
+      <label for="email">Your Email</label>
+      <input type="email" id="email" />
+    </div>
+    <div class="form-control">
+      <label for="message">Message</label>
+      <textarea id="message" rows="4" cols="30"></textarea>
+    </div>
+    <div class="form-control send-button">
+      <base-button>Send</base-button>
+    </div>
+  </form>
 </template>
 
 <script>
@@ -22,3 +30,36 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+form {
+  outline: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 0.5rem auto;
+  width: 60vw;
+  max-width: 768px;
+  text-align: center;
+}
+
+.form-control {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 10%;
+}
+
+.form-control label {
+  font-weight: bold;
+  margin-right: 1rem;
+}
+
+.form-control input,
+.form-control textarea {
+  border: solid 1px black;
+  border-radius: 3px;
+}
+
+.send-button {
+  justify-content: center;
+}
+</style>
