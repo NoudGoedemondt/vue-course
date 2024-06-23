@@ -41,6 +41,7 @@ export default {
         coachId: this.id,
         clientEmail: '',
         message: '',
+        dateTime: '',
       },
       invalidFields: {
         clientEmail: false,
@@ -78,11 +79,14 @@ export default {
       );
     },
     clearFields() {
-      (this.requestData.clientEmail = ''), (this.requestData.message = '');
+      this.requestData.clientEmail = '';
+      this.requestData.message = '';
+      this.requestData.dateTime = '';
     },
     ...mapActions(['addRequest']),
     submitMessage() {
       if (this.validateFields()) {
+        this.requestData.dateTime = new Date().toISOString();
         this.addRequest({ ...this.requestData });
         this.clearFields();
         this.$router.replace('/coaches');
