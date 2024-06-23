@@ -1,14 +1,14 @@
 <template>
   <form @submit.prevent="submitMessage">
-    <h3>Contact {{ coach.firstName + ' ' + coach.lastName }}</h3>
+    <h3>Contact {{ coachFullName }}</h3>
     <div class="form-control">
       <label for="email">Your email</label>
       <input
         type="email"
         id="email"
-        v-model="requestData.email"
-        :class="{ invalid: invalidFields.email }"
-        @focus="resetFieldValidity('email')"
+        v-model="requestData.clientEmail"
+        :class="{ invalid: invalidFields.clientEmail }"
+        @focus="resetFieldValidity('clientEmail')"
       />
     </div>
     <div class="form-control">
@@ -38,19 +38,21 @@ export default {
   data() {
     return {
       requestData: {
-        email: '',
+        coachId: this.id,
+        clientEmail: '',
         message: '',
       },
       invalidFields: {
-        email: false,
+        clientEmail: false,
         message: false,
       },
     };
   },
   computed: {
     ...mapGetters(['getCoachById']),
-    coach() {
-      return this.getCoachById(this.id);
+    coachFullName() {
+      const coachData = this.getCoachById(this.id);
+      return coachData.firstName + ' ' + coachData.lastName;
     },
   },
   methods: {
@@ -59,12 +61,12 @@ export default {
     },
     validateFields() {
       this.invalidFields = {
-        email: false,
+        clientEmail: false,
         message: false,
       };
 
-      if (!this.requestData.email) {
-        this.invalidFields.email = true;
+      if (!this.requestData.clientEmail) {
+        this.invalidFields.clientEmail = true;
       }
 
       if (!this.requestData.message) {
@@ -76,7 +78,7 @@ export default {
       );
     },
     clearFields() {
-      (this.requestData.email = ''), (this.requestData.message = '');
+      (this.requestData.clientEmail = ''), (this.requestData.message = '');
     },
     ...mapActions(['addRequest']),
     submitMessage() {
