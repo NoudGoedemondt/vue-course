@@ -10,12 +10,29 @@
           <router-link to="/requests">Requests</router-link>
         </li>
         <li>
-          <router-link to="/register">Register</router-link>
+          <router-link v-if="!hasUserId" to="/register">Register</router-link>
+          <router-link v-else to=""
+            >Registered as {{ registeredUser.firstName }}</router-link
+          >
         </li>
       </ul>
     </nav>
   </header>
 </template>
+
+<script>
+import { mapGetters, mapState } from 'vuex';
+
+export default {
+  computed: {
+    ...mapGetters(['hasUserId', 'getCoachById']),
+    ...mapState(['userId']),
+    registeredUser() {
+      return this.getCoachById(this.userId);
+    },
+  },
+};
+</script>
 
 <style scoped>
 header {

@@ -52,6 +52,7 @@ const store = createStore({
           rate: 19.99,
         },
       ],
+      userId: '',
     };
   },
   getters: {
@@ -66,10 +67,14 @@ const store = createStore({
         selectedAreas.every((area) => coach.areas.includes(area))
       );
     },
+    hasUserId(state) {
+      return state.userId !== '';
+    },
   },
   mutations: {
     ADD_COACH(state, coachData) {
       state.coaches.unshift(coachData);
+      state.userId = coachData.id;
     },
   },
   actions: {

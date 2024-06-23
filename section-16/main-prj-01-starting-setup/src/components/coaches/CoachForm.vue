@@ -162,7 +162,6 @@ export default {
         this.$emit('form-submitted', { ...this.coachRegistration });
         this.clearForm();
       }
-      //todo: after registering, remove option to register
     },
   },
 };
