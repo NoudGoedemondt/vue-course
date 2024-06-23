@@ -85,6 +85,7 @@ export default {
       if (this.validateFields()) {
         this.addRequest({ ...this.requestData });
         this.clearFields();
+        this.$router.replace('/coaches');
       }
     },
   },
