@@ -6,7 +6,7 @@
       <input
         type="email"
         id="email"
-        v-model="messageData.email"
+        v-model="requestData.email"
         :class="{ invalid: invalidFields.email }"
         @focus="resetFieldValidity('email')"
       />
@@ -17,7 +17,7 @@
         id="message"
         rows="5"
         cols="30"
-        v-model="messageData.message"
+        v-model="requestData.message"
         :class="{ invalid: invalidFields.message }"
         @focus="resetFieldValidity('message')"
       ></textarea>
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   props: {
@@ -37,7 +37,7 @@ export default {
   },
   data() {
     return {
-      messageData: {
+      requestData: {
         email: '',
         message: '',
       },
@@ -63,11 +63,11 @@ export default {
         message: false,
       };
 
-      if (!this.messageData.email) {
+      if (!this.requestData.email) {
         this.invalidFields.email = true;
       }
 
-      if (!this.messageData.message) {
+      if (!this.requestData.message) {
         this.invalidFields.message = true;
       }
 
@@ -76,11 +76,12 @@ export default {
       );
     },
     clearFields() {
-      (this.messageData.email = ''), (this.messageData.message = '');
+      (this.requestData.email = ''), (this.requestData.message = '');
     },
+    ...mapActions(['addRequest']),
     submitMessage() {
       if (this.validateFields()) {
-        console.log('data is good');
+        this.addRequest({ ...this.requestData });
         this.clearFields();
       }
     },

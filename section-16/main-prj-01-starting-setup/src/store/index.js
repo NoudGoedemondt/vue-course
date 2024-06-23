@@ -1,6 +1,8 @@
 import { createStore } from 'vuex';
+import requests from './modules/requests';
 
 const store = createStore({
+  modules: { requests },
   state() {
     return {
       coaches: [
@@ -52,16 +54,6 @@ const store = createStore({
       ],
     };
   },
-  mutations: {
-    ADD_COACH(state, coachData) {
-      state.coaches.unshift(coachData);
-    },
-  },
-  actions: {
-    addCoach(context, coachData) {
-      context.commit('ADD_COACH', coachData);
-    },
-  },
   getters: {
     hasCoaches(state) {
       return state.coaches && state.coaches.length > 0;
@@ -73,6 +65,16 @@ const store = createStore({
       return state.coaches.filter((coach) =>
         selectedAreas.every((area) => coach.areas.includes(area))
       );
+    },
+  },
+  mutations: {
+    ADD_COACH(state, coachData) {
+      state.coaches.unshift(coachData);
+    },
+  },
+  actions: {
+    addCoach(context, coachData) {
+      context.commit('ADD_COACH', coachData);
     },
   },
 });
