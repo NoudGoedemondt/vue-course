@@ -6,7 +6,7 @@ const store = createStore({
   modules: { requests, coaches },
   state() {
     return {
-      userId: '',
+      userId: 'c1',
     };
   },
   getters: {

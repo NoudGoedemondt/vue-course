@@ -1,18 +1,38 @@
 <template>
   <div class="request-item">
-    <h2>{{ clientEmail }}</h2>
+    <div class="mail-info">
+      <b>
+        from:
+        <span
+          ><a :href="emailLink">{{ clientEmail }}</a></span
+        >
+      </b>
+      <p>{{ date + ' ' + time }}</p>
+    </div>
+    <b>message:</b>
     <p>{{ message }}</p>
-    <p>{{ dateTime }}</p>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    coachId: String,
     clientEmail: String,
     message: String,
     dateTime: String,
+  },
+  computed: {
+    emailLink() {
+      return 'mailto:' + this.clientEmail;
+    },
+    date() {
+      return this.dateTime.split('T')[0];
+    },
+    time() {
+      const timePart = this.dateTime.split('T')[1].split('Z')[0];
+      const [hours, minutes] = timePart.split(':');
+      return `${hours}:${minutes}`;
+    },
   },
 };
 </script>
@@ -25,5 +45,11 @@ export default {
   margin: 0.5rem;
   width: 80vw;
   max-width: 1024px;
+}
+
+.mail-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 </style>
