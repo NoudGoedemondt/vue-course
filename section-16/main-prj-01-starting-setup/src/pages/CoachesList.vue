@@ -49,7 +49,7 @@ export default {
       this.activeFilters = enabledFilters;
     },
   },
-  mounted() {
+  created() {
     this.$store.dispatch('getCoaches');
   },
 };
