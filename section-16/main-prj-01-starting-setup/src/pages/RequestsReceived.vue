@@ -12,7 +12,11 @@
     <h3>You haven't received any requests yet...</h3>
   </div>
   <div class="not-registered" v-if="!hasUserId">
-    <h3>You have to be registered to receive requests...</h3>
+    <h3>
+      Please
+      <span><router-link to="/register">register</router-link></span>
+      to receive requests...
+    </h3>
   </div>
 </template>
 

@@ -11,7 +11,7 @@
         </li>
         <li>
           <router-link v-if="!hasUserId" to="/register">Register</router-link>
-          <router-link v-else to=""
+          <router-link v-else to="/register"
             >Registered as {{ registeredUser.firstName }}</router-link
           >
         </li>
