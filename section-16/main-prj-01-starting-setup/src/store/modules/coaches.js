@@ -2,51 +2,51 @@ const coaches = {
   state() {
     return {
       coaches: [
-        {
-          id: 'c1',
-          firstName: 'Noud',
-          lastName: 'Goedemondt',
-          areas: ['backend', 'career'],
-          description:
-            'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore odio, nemo, temporibus, quae minus magnam blanditiis repellat beatae hic accusamus aperiam eum maxime ab. Ad voluptas accusantium excepturi eius fuga.',
-          rate: 49.99,
-        },
-        {
-          id: 'c2',
-          firstName: 'Max',
-          lastName: 'Schwarz',
-          areas: ['frontend', 'career'],
-          description:
-            'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore odio, nemo, temporibus, quae minus magnam blanditiis repellat beatae hic accusamus aperiam eum maxime ab. Ad voluptas accusantium excepturi eius fuga.',
-          rate: 29.99,
-        },
-        {
-          id: 'c3',
-          firstName: 'Henk',
-          lastName: 'Janse',
-          areas: ['frontend', 'backend'],
-          description:
-            'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore odio, nemo, temporibus, quae minus magnam blanditiis repellat beatae hic accusamus aperiam eum maxime ab. Ad voluptas accusantium excepturi eius fuga.',
-          rate: 99.99,
-        },
-        {
-          id: 'c4',
-          firstName: 'John',
-          lastName: 'Doe',
-          areas: ['frontend', 'career'],
-          description:
-            'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore odio, nemo, temporibus, quae minus magnam blanditiis repellat beatae hic accusamus aperiam eum maxime ab. Ad voluptas accusantium excepturi eius fuga.',
-          rate: 19.99,
-        },
-        {
-          id: 'c5',
-          firstName: 'Jane',
-          lastName: 'Johnson',
-          areas: ['frontend'],
-          description:
-            'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore odio, nemo, temporibus, quae minus magnam blanditiis repellat beatae hic accusamus aperiam eum maxime ab. Ad voluptas accusantium excepturi eius fuga.',
-          rate: 19.99,
-        },
+        //{
+        //   id: 'c1',
+        //   firstName: 'Noud',
+        //   lastName: 'Goedemondt',
+        //   areas: ['backend', 'career'],
+        //   description:
+        //     'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore odio, nemo, temporibus, quae minus magnam blanditiis repellat beatae hic accusamus aperiam eum maxime ab. Ad voluptas accusantium excepturi eius fuga.',
+        //   rate: 49.99,
+        // },
+        // {
+        //   id: 'c2',
+        //   firstName: 'Max',
+        //   lastName: 'Schwarz',
+        //   areas: ['frontend', 'career'],
+        //   description:
+        //     'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore odio, nemo, temporibus, quae minus magnam blanditiis repellat beatae hic accusamus aperiam eum maxime ab. Ad voluptas accusantium excepturi eius fuga.',
+        //   rate: 29.99,
+        // },
+        // {
+        //   id: 'c3',
+        //   firstName: 'Henk',
+        //   lastName: 'Janse',
+        //   areas: ['frontend', 'backend'],
+        //   description:
+        //     'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore odio, nemo, temporibus, quae minus magnam blanditiis repellat beatae hic accusamus aperiam eum maxime ab. Ad voluptas accusantium excepturi eius fuga.',
+        //   rate: 99.99,
+        // },
+        // {
+        //   id: 'c4',
+        //   firstName: 'John',
+        //   lastName: 'Doe',
+        //   areas: ['frontend', 'career'],
+        //   description:
+        //     'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore odio, nemo, temporibus, quae minus magnam blanditiis repellat beatae hic accusamus aperiam eum maxime ab. Ad voluptas accusantium excepturi eius fuga.',
+        //   rate: 19.99,
+        // },
+        // {
+        //   id: 'c5',
+        //   firstName: 'Jane',
+        //   lastName: 'Johnson',
+        //   areas: ['frontend'],
+        //   description:
+        //     'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore odio, nemo, temporibus, quae minus magnam blanditiis repellat beatae hic accusamus aperiam eum maxime ab. Ad voluptas accusantium excepturi eius fuga.',
+        //   rate: 19.99,
+        // },
       ],
     };
   },
@@ -67,6 +67,9 @@ const coaches = {
     ADD_COACH(state, coachData) {
       state.coaches.unshift(coachData);
     },
+    SET_COACHES(state, coaches) {
+      state.coaches = coaches;
+    },
   },
   actions: {
     async addCoach(context, coachData) {
@@ -86,6 +89,27 @@ const coaches = {
 
       context.commit('ADD_COACH', coachData);
       context.commit('SET_USER_ID', coachData.id, { root: true });
+    },
+    async getCoaches(context) {
+      const response = await fetch(
+        'https://vue-course-db-9d875-default-rtdb.europe-west1.firebasedatabase.app/coaches.json'
+      );
+      const coachRecords = await response.json();
+
+      if (!response.ok) {
+        //error
+      }
+
+      const coaches = Object.keys(coachRecords).map((id) => ({
+        id: id,
+        firstName: coachRecords[id].firstName,
+        lastName: coachRecords[id].lastName,
+        areas: coachRecords[id].areas,
+        description: coachRecords[id].description,
+        rate: coachRecords[id].rate,
+      }));
+
+      context.commit('SET_COACHES', coaches);
     },
   },
 };

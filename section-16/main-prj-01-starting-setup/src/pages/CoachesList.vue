@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import CoachesListItem from '../components/coaches/CoachesListItem.vue';
 import CoachFilter from '../components/coaches/CoachFilter.vue';
 
@@ -36,6 +36,7 @@ export default {
   },
   computed: {
     ...mapGetters(['filteredCoaches', 'hasCoaches']),
+    ...mapActions(['getCoaches']),
     coaches() {
       return this.filteredCoaches(this.activeFilters);
     },
@@ -47,6 +48,9 @@ export default {
     setFilters(enabledFilters) {
       this.activeFilters = enabledFilters;
     },
+  },
+  mounted() {
+    this.$store.dispatch('getCoaches');
   },
 };
 </script>
