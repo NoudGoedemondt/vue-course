@@ -1,6 +1,6 @@
 <template>
-  <coach-filter v-if="hasCoaches" @enableFilters="setFilters" />
-  <div v-if="hasCoaches" class="coaches">
+  <coach-filter v-if="hasCoaches && !isLoading" @enableFilters="setFilters" />
+  <div class="coaches" v-if="hasCoaches && !isLoading">
     <TransitionGroup name="list">
       <coaches-list-item
         v-for="coach in coaches"
@@ -14,8 +14,14 @@
       />
     </TransitionGroup>
   </div>
-  <div v-if="!hasFilteredCoaches || !hasCoaches" class="no-coaches">
+  <div
+    class="no-coaches"
+    v-if="(!hasFilteredCoaches || !hasCoaches) && !isloading"
+  >
     <h3>No coaches found...</h3>
+  </div>
+  <div class="loading-spinner" v-if="isLoading">
+    <base-spinner />
   </div>
 </template>
 
@@ -32,6 +38,7 @@ export default {
   data() {
     return {
       activeFilters: [],
+      isLoading: false,
     };
   },
   computed: {
@@ -48,9 +55,14 @@ export default {
     setFilters(enabledFilters) {
       this.activeFilters = enabledFilters;
     },
+    async loadCoaches() {
+      this.isLoading = true;
+      await this.$store.dispatch('getCoaches');
+      this.isLoading = false;
+    },
   },
   created() {
-    this.$store.dispatch('getCoaches');
+    this.loadCoaches();
   },
 };
 </script>
@@ -63,7 +75,8 @@ export default {
   align-items: center;
 }
 
-.no-coaches {
+.no-coaches,
+.loading-spinner {
   margin-top: 2rem;
 }
 
