@@ -16,7 +16,7 @@
   </div>
   <div
     class="no-coaches"
-    v-if="(!hasFilteredCoaches || !hasCoaches) && !isloading"
+    v-if="(!hasFilteredCoaches || !hasCoaches) && !isLoading"
   >
     <h3>No coaches found...</h3>
   </div>
