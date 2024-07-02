@@ -39,6 +39,7 @@ export default {
     return {
       activeFilters: [],
       isLoading: false,
+      error: false,
     };
   },
   computed: {
@@ -57,7 +58,12 @@ export default {
     },
     async loadCoaches() {
       this.isLoading = true;
-      await this.$store.dispatch('getCoaches');
+      try {
+        await this.$store.dispatch('getCoaches');
+      } catch (error) {
+        this.error = error.message || 'Something went wrong!';
+        console.log(this.error);
+      }
       this.isLoading = false;
     },
   },
