@@ -2,43 +2,43 @@ const requests = {
   state() {
     return {
       requests: [
-        {
-          coachId: 'c1',
-          clientEmail: '0947906@hr.nl',
-          message:
-            'Lorem ipsum dolor sit amet. Aut placeat consequuntur id reiciendis necessitatibus et expedita voluptas ex consectetur provident sit Quis ullam cum tempore sunt. Qui voluptas reprehenderit sit excepturi voluptas qui sunt excepturi et harum quod eum dolorem dolores non adipisci dolorem a delectus sapiente.',
-          dateTime: '2024-06-24T14:55:43.301Z',
-        },
-        {
-          coachId: 'c1',
-          clientEmail: '0947906@hr.nl',
-          message: 'Hallo help me',
-          dateTime: '2024-06-24T14:55:43.301Z',
-        },
-        {
-          coachId: 'c1',
-          clientEmail: '0947906@hr.nl',
-          message: 'Hallo help me',
-          dateTime: '2024-06-24T14:55:43.301Z',
-        },
-        {
-          coachId: 'c2',
-          clientEmail: '0947906@hr.nl',
-          message: 'Hallo help me',
-          dateTime: '2024-06-24T14:55:43.301Z',
-        },
-        {
-          coachId: 'c2',
-          clientEmail: '0947906@hr.nl',
-          message: 'Hallo help me',
-          dateTime: '2024-06-24T14:55:43.301Z',
-        },
-        {
-          coachId: 'c3',
-          clientEmail: '0947906@hr.nl',
-          message: 'Hallo help me',
-          dateTime: '2024-06-24T14:55:43.301Z',
-        },
+        // {
+        //   coachId: 'c1',
+        //   clientEmail: '0947906@hr.nl',
+        //   message:
+        //     'Lorem ipsum dolor sit amet. Aut placeat consequuntur id reiciendis necessitatibus et expedita voluptas ex consectetur provident sit Quis ullam cum tempore sunt. Qui voluptas reprehenderit sit excepturi voluptas qui sunt excepturi et harum quod eum dolorem dolores non adipisci dolorem a delectus sapiente.',
+        //   dateTime: '2024-06-24T14:55:43.301Z',
+        // },
+        // {
+        //   coachId: 'c1',
+        //   clientEmail: '0947906@hr.nl',
+        //   message: 'Hallo help me',
+        //   dateTime: '2024-06-24T14:55:43.301Z',
+        // },
+        // {
+        //   coachId: 'c1',
+        //   clientEmail: '0947906@hr.nl',
+        //   message: 'Hallo help me',
+        //   dateTime: '2024-06-24T14:55:43.301Z',
+        // },
+        // {
+        //   coachId: 'c2',
+        //   clientEmail: '0947906@hr.nl',
+        //   message: 'Hallo help me',
+        //   dateTime: '2024-06-24T14:55:43.301Z',
+        // },
+        // {
+        //   coachId: 'c2',
+        //   clientEmail: '0947906@hr.nl',
+        //   message: 'Hallo help me',
+        //   dateTime: '2024-06-24T14:55:43.301Z',
+        // },
+        // {
+        //   coachId: 'c3',
+        //   clientEmail: '0947906@hr.nl',
+        //   message: 'Hallo help me',
+        //   dateTime: '2024-06-24T14:55:43.301Z',
+        // },
       ],
     };
   },
@@ -56,7 +56,29 @@ const requests = {
     },
   },
   actions: {
-    addRequest(context, requestData) {
+    async addRequest(context, requestData) {
+      const newRequest = {
+        clientEmail: requestData.clientEmail,
+        dateTime: requestData.dateTime,
+        message: requestData.message,
+      };
+
+      const response = await fetch(
+        `https://vue-course-db-9d875-default-rtdb.europe-west1.firebasedatabase.app/requests/${requestData.coachId}.json`,
+        {
+          method: 'POST',
+          body: JSON.stringify(newRequest),
+        }
+      );
+
+      const responseData = await response.json();
+
+      requestData.id = responseData.name;
+
+      if (!response.ok) {
+        //error
+      }
+
       context.commit('ADD_REQUEST', requestData);
     },
   },

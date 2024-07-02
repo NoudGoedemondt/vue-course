@@ -1,4 +1,13 @@
 <template>
+  <div class="test">
+    <label for="userId">enter userId</label>
+    <input
+      type="text"
+      id="userId"
+      ref="userIdInput"
+      @keyup.enter="changeUserId"
+    />
+  </div>
   <the-header />
   <router-view />
 </template>
@@ -9,6 +18,12 @@ import TheHeader from './components/UI/TheHeader.vue';
 export default {
   components: {
     TheHeader,
+  },
+  methods: {
+    changeUserId() {
+      const userId = this.$refs.userIdInput.value;
+      this.$store.dispatch('setUserId', userId);
+    },
   },
 };
 </script>

@@ -19,6 +19,11 @@ const store = createStore({
       state.userId = coachId;
     },
   },
+  actions: {
+    setUserId(context, payload) {
+      context.commit('SET_USER_ID', payload);
+    },
+  },
 });
 
 export default store;
