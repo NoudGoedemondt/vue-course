@@ -28,6 +28,11 @@ export default {
   components: {
     RequestListItem,
   },
+  data() {
+    return {
+      isLoading: false,
+    };
+  },
   computed: {
     ...mapGetters(['getRequestsById', 'hasRequests', 'hasUserId']),
     ...mapState(['userId']),
@@ -37,6 +42,21 @@ export default {
     userHasRequests() {
       return this.hasRequests(this.userId);
     },
+  },
+  methods: {
+    async loadRequests() {
+      this.isLoading = true;
+      try {
+        await this.$store.dispatch('getRequests');
+      } catch (error) {
+        this.error = error.message || 'Something went wrong!';
+        console.log(this.error);
+      }
+      this.isLoading = false;
+    },
+  },
+  created() {
+    this.loadRequests();
   },
 };
 </script>

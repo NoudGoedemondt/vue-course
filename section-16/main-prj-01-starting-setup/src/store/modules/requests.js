@@ -1,45 +1,7 @@
 const requests = {
   state() {
     return {
-      requests: [
-        // {
-        //   coachId: 'c1',
-        //   clientEmail: '0947906@hr.nl',
-        //   message:
-        //     'Lorem ipsum dolor sit amet. Aut placeat consequuntur id reiciendis necessitatibus et expedita voluptas ex consectetur provident sit Quis ullam cum tempore sunt. Qui voluptas reprehenderit sit excepturi voluptas qui sunt excepturi et harum quod eum dolorem dolores non adipisci dolorem a delectus sapiente.',
-        //   dateTime: '2024-06-24T14:55:43.301Z',
-        // },
-        // {
-        //   coachId: 'c1',
-        //   clientEmail: '0947906@hr.nl',
-        //   message: 'Hallo help me',
-        //   dateTime: '2024-06-24T14:55:43.301Z',
-        // },
-        // {
-        //   coachId: 'c1',
-        //   clientEmail: '0947906@hr.nl',
-        //   message: 'Hallo help me',
-        //   dateTime: '2024-06-24T14:55:43.301Z',
-        // },
-        // {
-        //   coachId: 'c2',
-        //   clientEmail: '0947906@hr.nl',
-        //   message: 'Hallo help me',
-        //   dateTime: '2024-06-24T14:55:43.301Z',
-        // },
-        // {
-        //   coachId: 'c2',
-        //   clientEmail: '0947906@hr.nl',
-        //   message: 'Hallo help me',
-        //   dateTime: '2024-06-24T14:55:43.301Z',
-        // },
-        // {
-        //   coachId: 'c3',
-        //   clientEmail: '0947906@hr.nl',
-        //   message: 'Hallo help me',
-        //   dateTime: '2024-06-24T14:55:43.301Z',
-        // },
-      ],
+      requests: [],
     };
   },
   getters: {
@@ -53,6 +15,9 @@ const requests = {
   mutations: {
     ADD_REQUEST(state, requestData) {
       state.requests.unshift(requestData);
+    },
+    SET_REQUESTS(state, requests) {
+      state.requests = requests;
     },
   },
   actions: {
@@ -80,6 +45,33 @@ const requests = {
       }
 
       context.commit('ADD_REQUEST', requestData);
+    },
+    async getRequests(context) {
+      const registeredId = context.rootState.userId;
+
+      if (!registeredId) {
+        console.error('No user ID set');
+        return;
+      }
+
+      const response = await fetch(
+        `https://vue-course-db-9d875-default-rtdb.europe-west1.firebasedatabase.app/requests/${registeredId}.json`
+      );
+      const requestRecords = await response.json();
+
+      if (!response.ok) {
+        //error
+      }
+
+      const parsedRequests = Object.keys(requestRecords).map((requestId) => ({
+        requestid: requestId,
+        clientEmail: requestRecords[requestId].clientEmail,
+        dateTime: requestRecords[requestId].dateTime,
+        message: requestRecords[requestId].message,
+      }));
+
+      context.commit('SET_REQUESTS', parsedRequests);
+      console.log(parsedRequests);
     },
   },
 };
