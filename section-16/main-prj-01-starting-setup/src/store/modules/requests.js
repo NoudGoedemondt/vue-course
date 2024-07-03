@@ -5,11 +5,8 @@ const requests = {
     };
   },
   getters: {
-    getRequestsById: (state) => (id) => {
-      return state.requests.filter((request) => request.coachId === id);
-    },
-    hasRequests: (state) => (id) => {
-      return state.requests.some((request) => request.coachId === id);
+    hasRequests(state) {
+      return state.requests && state.requests.length > 0;
     },
   },
   mutations: {
@@ -64,14 +61,13 @@ const requests = {
       }
 
       const parsedRequests = Object.keys(requestRecords).map((requestId) => ({
-        requestid: requestId,
+        requestId: requestId,
         clientEmail: requestRecords[requestId].clientEmail,
         dateTime: requestRecords[requestId].dateTime,
         message: requestRecords[requestId].message,
       }));
 
       context.commit('SET_REQUESTS', parsedRequests);
-      console.log(parsedRequests);
     },
   },
 };

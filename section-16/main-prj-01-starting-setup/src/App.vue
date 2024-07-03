@@ -7,22 +7,32 @@
       ref="userIdInput"
       @keyup.enter="changeUserId"
     />
+    {{ userId }}
+    {{ requests }}
+    <button @click="loadRequests">load requests</button>
   </div>
   <the-header />
   <router-view />
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import TheHeader from './components/UI/TheHeader.vue';
 
 export default {
   components: {
     TheHeader,
   },
+  computed: {
+    ...mapState(['userId', 'requests']),
+  },
   methods: {
     changeUserId() {
       const userId = this.$refs.userIdInput.value;
       this.$store.dispatch('setUserId', userId);
+    },
+    loadRequests() {
+      this.$store.dispatch('getRequests');
     },
   },
 };

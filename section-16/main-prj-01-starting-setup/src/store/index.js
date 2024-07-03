@@ -11,7 +11,7 @@ const store = createStore({
   },
   getters: {
     hasUserId(state) {
-      return state.userId !== '';
+      return state.userId && state.userId.length > 0;
     },
   },
   mutations: {

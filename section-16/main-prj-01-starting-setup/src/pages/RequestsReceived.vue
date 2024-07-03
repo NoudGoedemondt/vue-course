@@ -1,17 +1,17 @@
 <template>
   <div class="requests" v-if="hasRequests && hasUserId">
     <request-list-item
-      v-for="request in filteredRequests"
-      :key="request.dateTime"
+      v-for="request in requests"
+      :key="request.requestId"
       :clientEmail="request.clientEmail"
       :message="request.message"
       :dateTime="request.dateTime"
     />
   </div>
-  <div class="no-requests" v-if="!userHasRequests && hasUserId">
+  <div class="no-requests" v-else-if="!hasRequests && hasUserId">
     <h3>You haven't received any requests yet...</h3>
   </div>
-  <div class="not-registered" v-if="!hasUserId">
+  <div class="not-registered" v-else-if="!hasUserId">
     <h3>
       Please
       <span><router-link to="/register">register</router-link></span>
@@ -34,14 +34,8 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['getRequestsById', 'hasRequests', 'hasUserId']),
-    ...mapState(['userId']),
-    filteredRequests() {
-      return this.getRequestsById(this.userId);
-    },
-    userHasRequests() {
-      return this.hasRequests(this.userId);
-    },
+    ...mapGetters(['hasRequests', 'hasUserId']),
+    ...mapState(['requests']),
   },
   methods: {
     async loadRequests() {
