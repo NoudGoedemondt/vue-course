@@ -1,6 +1,9 @@
 <template>
-  <coach-filter v-if="hasCoaches && !isLoading" @enableFilters="setFilters" />
-  <div class="coaches" v-if="hasCoaches && !isLoading">
+  <div class="loading-spinner" v-if="isLoading">
+    <base-spinner />
+  </div>
+  <div class="coaches" v-else-if="hasCoaches">
+    <coach-filter @enableFilters="setFilters" />
     <TransitionGroup name="list">
       <coaches-list-item
         v-for="coach in coaches"
@@ -14,14 +17,8 @@
       />
     </TransitionGroup>
   </div>
-  <div
-    class="no-coaches"
-    v-if="(!hasFilteredCoaches || !hasCoaches) && !isLoading"
-  >
+  <div class="no-coaches" v-else-if="!hasFilteredCoaches || !hasCoaches">
     <h3>No coaches found...</h3>
-  </div>
-  <div class="loading-spinner" v-if="isLoading">
-    <base-spinner />
   </div>
 </template>
 

@@ -8,6 +8,7 @@
       @keyup.enter="changeUserId"
     />
     {{ userId }}
+    <button @click="clearCoaches">clear coaches</button>
     <button @click="loadRequests">load requests</button>
   </div>
   <the-header />
@@ -32,6 +33,9 @@ export default {
     },
     loadRequests() {
       this.$store.dispatch('getRequests');
+    },
+    clearCoaches() {
+      this.$store.commit('CLEAR_COACHES');
     },
   },
 };

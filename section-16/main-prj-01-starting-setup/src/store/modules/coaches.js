@@ -24,6 +24,9 @@ const coaches = {
     SET_COACHES(state, coaches) {
       state.coaches = coaches;
     },
+    CLEAR_COACHES(state) {
+      state.coaches = [];
+    },
   },
   actions: {
     async addCoach(context, coachData) {
