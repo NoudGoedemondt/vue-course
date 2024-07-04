@@ -1,7 +1,7 @@
 <template>
   <div class="requests" v-if="hasRequests && hasUserId">
     <request-list-item
-      v-for="request in requests"
+      v-for="request in currentRequests"
       :key="request.requestId"
       :clientEmail="request.clientEmail"
       :message="request.message"
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 import RequestListItem from '../components/requests/RequestListItem.vue';
 
 export default {
@@ -34,8 +34,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['hasRequests', 'hasUserId']),
-    ...mapState(['requests']),
+    ...mapGetters(['hasRequests', 'hasUserId', 'currentRequests']),
   },
   methods: {
     async loadRequests() {

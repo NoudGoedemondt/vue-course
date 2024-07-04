@@ -8,7 +8,6 @@
       @keyup.enter="changeUserId"
     />
     {{ userId }}
-    {{ requests }}
     <button @click="loadRequests">load requests</button>
   </div>
   <the-header />

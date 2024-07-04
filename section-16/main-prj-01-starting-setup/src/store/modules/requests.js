@@ -8,6 +8,9 @@ const requests = {
     hasRequests(state) {
       return state.requests && state.requests.length > 0;
     },
+    currentRequests(state) {
+      return state.requests;
+    },
   },
   mutations: {
     ADD_REQUEST(state, requestData) {
