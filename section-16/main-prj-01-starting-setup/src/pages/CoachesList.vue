@@ -17,7 +17,7 @@
       />
     </TransitionGroup>
   </div>
-  <div class="no-coaches" v-else-if="!hasFilteredCoaches || !hasCoaches">
+  <div class="no-coaches" v-else>
     <h3>No coaches found...</h3>
   </div>
 </template>
@@ -44,9 +44,6 @@ export default {
     ...mapActions(['getCoaches']),
     coaches() {
       return this.filteredCoaches(this.activeFilters);
-    },
-    hasFilteredCoaches() {
-      return this.coaches.length > 0;
     },
   },
   methods: {
