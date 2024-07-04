@@ -159,7 +159,11 @@ export default {
     },
     submitForm() {
       if (this.validateForm()) {
-        this.$emit('form-submitted', { ...this.coachRegistration });
+        const validatedCoachRegistration = {
+          ...this.coachRegistration,
+          areas: [...this.coachRegistration.areas].sort(),
+        };
+        this.$emit('form-submitted', validatedCoachRegistration);
         this.clearForm();
       }
     },
