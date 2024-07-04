@@ -25,13 +25,16 @@ export default {
     emailLink() {
       return 'mailto:' + this.clientEmail;
     },
+    dateObject() {
+      return new Date(this.dateTime);
+    },
     date() {
-      return this.dateTime.split('T')[0];
+      return `${this.dateObject.getDay()}-${
+        this.dateObject.getMonth() + 1
+      }-${this.dateObject.getFullYear()}`;
     },
     time() {
-      const timePart = this.dateTime.split('T')[1].split('Z')[0];
-      const [hours, minutes] = timePart.split(':');
-      return `${hours}:${minutes}`;
+      return `${this.dateObject.getHours()}:${this.dateObject.getMinutes()}`;
     },
   },
 };

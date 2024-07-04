@@ -54,7 +54,7 @@ const coaches = {
         //error
       }
 
-      const coaches = Object.keys(coachRecords).map((id) => ({
+      const parsedCoaches = Object.keys(coachRecords).map((id) => ({
         id: id,
         firstName: coachRecords[id].firstName,
         lastName: coachRecords[id].lastName,
@@ -63,7 +63,7 @@ const coaches = {
         rate: coachRecords[id].rate,
       }));
 
-      context.commit('SET_COACHES', coaches);
+      context.commit('SET_COACHES', parsedCoaches);
     },
   },
 };

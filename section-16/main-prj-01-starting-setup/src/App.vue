@@ -24,7 +24,7 @@ export default {
     TheHeader,
   },
   computed: {
-    ...mapState(['userId', 'requests']),
+    ...mapState(['userId', 'requests', 'coaches']),
   },
   methods: {
     changeUserId() {
