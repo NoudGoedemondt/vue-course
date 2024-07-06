@@ -2,6 +2,7 @@ const coaches = {
   state() {
     return {
       coaches: [],
+      lastFetch: null,
     };
   },
   getters: {
@@ -16,6 +17,14 @@ const coaches = {
         selectedAreas.every((area) => coach.areas.includes(area))
       );
     },
+    shouldUpdate(state) {
+      const lastFetch = state.lastFetch;
+      if (!lastFetch) {
+        return true;
+      }
+      const currentTime = new Date().getTime();
+      return (currentTime - lastFetch) / 1000 > 60;
+    },
   },
   mutations: {
     ADD_COACH(state, coachData) {
@@ -26,6 +35,9 @@ const coaches = {
     },
     CLEAR_COACHES(state) {
       state.coaches = [];
+    },
+    SET_FETCH_TIMESTAMP(state) {
+      state.lastFetch = new Date().getTime();
     },
   },
   actions: {
@@ -48,6 +60,10 @@ const coaches = {
       context.commit('SET_USER_ID', coachData.id, { root: true });
     },
     async getCoaches(context) {
+      if (!context.getters.shouldUpdate) {
+        return;
+      }
+
       const response = await fetch(
         'https://vue-course-db-9d875-default-rtdb.europe-west1.firebasedatabase.app/coaches.json'
       );
@@ -67,6 +83,7 @@ const coaches = {
       }));
 
       context.commit('SET_COACHES', parsedCoaches);
+      context.commit('SET_FETCH_TIMESTAMP');
     },
   },
 };
