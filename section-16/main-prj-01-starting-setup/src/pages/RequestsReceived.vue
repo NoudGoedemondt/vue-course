@@ -1,22 +1,24 @@
 <template>
-  <div class="requests" v-if="hasRequests && hasUserId">
-    <request-list-item
-      v-for="request in currentRequests"
-      :key="request.requestId"
-      :clientEmail="request.clientEmail"
-      :message="request.message"
-      :dateTime="request.dateTime"
-    />
-  </div>
-  <div class="no-requests" v-else-if="!hasRequests && hasUserId">
-    <h3>You haven't received any requests yet...</h3>
-  </div>
-  <div class="not-registered" v-else-if="!hasUserId">
-    <h3>
-      Please
-      <span><router-link to="/register">register</router-link></span>
-      to receive requests...
-    </h3>
+  <div class="requests-received">
+    <div class="requests" v-if="hasRequests && hasUserId">
+      <request-list-item
+        v-for="request in currentRequests"
+        :key="request.requestId"
+        :clientEmail="request.clientEmail"
+        :message="request.message"
+        :dateTime="request.dateTime"
+      />
+    </div>
+    <div class="no-requests" v-else-if="!hasRequests && hasUserId">
+      <h3>You haven't received any requests yet...</h3>
+    </div>
+    <div class="not-registered" v-else-if="!hasUserId">
+      <h3>
+        Please
+        <span><router-link to="/register">register</router-link></span>
+        to receive requests...
+      </h3>
+    </div>
   </div>
 </template>
 

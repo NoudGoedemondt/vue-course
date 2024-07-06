@@ -1,5 +1,7 @@
 <template>
-  <coach-form @form-submitted="addNewCoach" />
+  <div class="coach-registration">
+    <coach-form @form-submitted="addNewCoach" />
+  </div>
 </template>
 
 <script>

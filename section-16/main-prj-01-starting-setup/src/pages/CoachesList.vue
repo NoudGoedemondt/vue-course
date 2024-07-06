@@ -1,24 +1,26 @@
 <template>
-  <div class="loading-spinner" v-if="isLoading">
-    <base-spinner />
-  </div>
-  <div class="coaches" v-else-if="hasCoaches">
-    <coach-filter @enableFilters="setFilters" />
-    <TransitionGroup name="list">
-      <coaches-list-item
-        v-for="coach in coaches"
-        :key="coach.id"
-        :id="coach.id"
-        :firstName="coach.firstName"
-        :lastName="coach.lastName"
-        :areas="coach.areas"
-        :description="coach.description"
-        :rate="coach.rate"
-      />
-    </TransitionGroup>
-  </div>
-  <div class="no-coaches" v-else>
-    <h3>No coaches found...</h3>
+  <div class="coaches-list">
+    <div class="loading-spinner" v-if="isLoading">
+      <base-spinner />
+    </div>
+    <div class="coaches" v-else-if="hasCoaches">
+      <coach-filter @enableFilters="setFilters" />
+      <TransitionGroup name="list">
+        <coaches-list-item
+          v-for="coach in coaches"
+          :key="coach.id"
+          :id="coach.id"
+          :firstName="coach.firstName"
+          :lastName="coach.lastName"
+          :areas="coach.areas"
+          :description="coach.description"
+          :rate="coach.rate"
+        />
+      </TransitionGroup>
+    </div>
+    <div class="no-coaches" v-else>
+      <h3>No coaches found...</h3>
+    </div>
   </div>
 </template>
 
