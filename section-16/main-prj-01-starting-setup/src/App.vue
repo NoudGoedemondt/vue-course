@@ -1,5 +1,5 @@
 <template>
-  <div class="test">
+  <!-- <div class="test">
     <label for="userId">enter userId</label>
     <input
       type="text"
@@ -10,7 +10,7 @@
     {{ userId }}
     <button @click="clearCoaches">clear coaches</button>
     <button @click="loadRequests">load requests</button>
-  </div>
+  </div> -->
   <the-header />
   <router-view v-slot="slotProps">
     <transition name="route" mode="out-in">
@@ -91,11 +91,11 @@ li {
 }
 
 .route-enter-active {
-  transition: all 0.3s ease-out;
+  transition: all 0.1s ease-out;
 }
 
 .route-leave-active {
-  transition: all 0.3s ease-in;
+  transition: all 0.1s ease-in;
 }
 
 .route-enter-to {
