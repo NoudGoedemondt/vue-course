@@ -30,34 +30,36 @@ const store = createStore({
     setUserId(context, payload) {
       context.commit('SET_USER_ID', payload);
     },
-  },
-  async signUp(context, payload) {
-    const response = await fetch(
-      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBXwRPVa7jqldAFJhhnZpN874B6mLQds9U',
-      {
-        method: 'POST',
-        body: JSON.stringify({
-          email: payload.email,
-          password: payload.password,
-          returnSecureToken: true,
-        }),
+    async signUp(context, payload) {
+      const response = await fetch(
+        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBXwRPVa7jqldAFJhhnZpN874B6mLQds9U',
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            email: payload.email,
+            password: payload.password,
+            returnSecureToken: true,
+          }),
+        }
+      );
+
+      const responseData = await response.json();
+
+      if (!response.ok) {
+        const error = new Error(
+          responseData.message || 'Failed to authenticate'
+        );
+        throw error;
       }
-    );
 
-    const responseData = await response.json();
+      console.log(responseData);
 
-    if (!response.ok) {
-      const error = new Error(responseData.message || 'Failed to authenticate');
-      throw error;
-    }
-
-    console.log(response);
-
-    context.commit('SET_USER', {
-      token: responseData.IdToken,
-      userId: responseData.localId,
-      tokenExpiration: responseData.expiresIn,
-    });
+      context.commit('SET_USER', {
+        token: responseData.IdToken,
+        userId: responseData.localId,
+        tokenExpiration: responseData.expiresIn,
+      });
+    },
   },
 });
 

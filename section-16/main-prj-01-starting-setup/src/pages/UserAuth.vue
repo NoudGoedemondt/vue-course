@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="authenticateUser">
+  <form @submit.prevent="submitForm">
     <div class="form-control">
       <label for="email">E-mail</label>
       <input
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   data() {
     return {
@@ -42,6 +44,8 @@ export default {
         password: false,
       },
       mode: 'logIn',
+      isLoading: false,
+      error: null,
     };
   },
   computed: {
@@ -67,7 +71,7 @@ export default {
         this.invalidFields.email = true;
       }
 
-      if (!this.formData.password) {
+      if (!this.formData.password || this.formData.password.length < 6) {
         this.invalidFields.password = true;
       }
 
@@ -75,12 +79,16 @@ export default {
         (field) => field === false
       );
     },
-    authenticateUser() {
-      if (this.validateForm()) {
-        // Perform login action
-        console.log('Form submitted:', this.formData);
+    ...mapActions(['signUp']),
+    async submitForm() {
+      if (!this.validateForm()) {
+        return;
+      }
+
+      if (this.mode === 'logIn') {
+        //execute login
       } else {
-        console.log('Validation failed');
+        await this.signUp({ ...this.formData });
       }
     },
     switchMode() {
