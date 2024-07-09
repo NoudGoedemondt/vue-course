@@ -6,7 +6,9 @@ const store = createStore({
   modules: { requests, coaches },
   state() {
     return {
-      userId: '',
+      userId: null,
+      token: null,
+      tokenExpiration: null,
     };
   },
   getters: {
@@ -18,11 +20,38 @@ const store = createStore({
     SET_USER_ID(state, coachId) {
       state.userId = coachId;
     },
+    SET_USER(state, payload) {
+      state.token = payload.token;
+      state.userId = payload.userId;
+      state.tokenExpiration = payload.tokenExpiration;
+    },
   },
   actions: {
     setUserId(context, payload) {
       context.commit('SET_USER_ID', payload);
     },
+  },
+  async signUp(context, payload) {
+    const response = await fetch(
+      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBXwRPVa7jqldAFJhhnZpN874B6mLQds9U',
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          email: payload.email,
+          password: payload.password,
+          returnSecureToken: true,
+        }),
+      }
+    );
+
+    const responseData = await response.json();
+
+    if (!response.ok) {
+      const error = new Error(responseData.message || 'Failed to authenticate');
+      throw error;
+    }
+
+    console.log(response);
   },
 });
 
