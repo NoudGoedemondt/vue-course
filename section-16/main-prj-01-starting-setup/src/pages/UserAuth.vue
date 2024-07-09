@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="logIn">
+  <form @submit.prevent="authenticateUser">
     <div class="form-control">
       <label for="email">E-mail</label>
       <input
@@ -21,7 +21,10 @@
       />
     </div>
     <div class="form-control login-button">
-      <base-button>Log in</base-button>
+      <base-button>{{ captions.button }}</base-button>
+    </div>
+    <div class="form-control signup-link">
+      <a @click="switchMode">{{ captions.link }}</a>
     </div>
   </form>
 </template>
@@ -38,7 +41,17 @@ export default {
         email: false,
         password: false,
       },
+      mode: 'logIn',
     };
+  },
+  computed: {
+    captions() {
+      if (this.mode === 'logIn') {
+        return { button: 'Log in', link: 'No account? Sign up instead' };
+      } else {
+        return { button: 'Sign up', link: 'Already have an account? Log in' };
+      }
+    },
   },
   methods: {
     resetValidity(field) {
@@ -62,12 +75,19 @@ export default {
         (field) => field === false
       );
     },
-    logIn() {
+    authenticateUser() {
       if (this.validateForm()) {
         // Perform login action
         console.log('Form submitted:', this.formData);
       } else {
         console.log('Validation failed');
+      }
+    },
+    switchMode() {
+      if (this.mode === 'logIn') {
+        this.mode = 'signUp';
+      } else {
+        this.mode = 'logIn';
       }
     },
   },
@@ -101,8 +121,15 @@ form {
   border-radius: 3px;
 }
 
-.login-button {
+.login-button,
+.signup-link {
   justify-content: center;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: underline;
+  color: blue;
 }
 
 .invalid {
