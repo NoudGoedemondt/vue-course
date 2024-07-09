@@ -43,7 +43,6 @@ export default {
   },
   computed: {
     ...mapGetters(['filteredCoaches', 'hasCoaches']),
-    ...mapActions(['getCoaches']),
     coaches() {
       return this.filteredCoaches(this.activeFilters);
     },
@@ -52,10 +51,11 @@ export default {
     setFilters(enabledFilters) {
       this.activeFilters = enabledFilters;
     },
+    ...mapActions(['getCoaches']),
     async loadCoaches() {
       this.isLoading = true;
       try {
-        await this.$store.dispatch('getCoaches');
+        await this.getCoaches();
       } catch (error) {
         this.error = error.message || 'Something went wrong!';
         console.log(this.error);
