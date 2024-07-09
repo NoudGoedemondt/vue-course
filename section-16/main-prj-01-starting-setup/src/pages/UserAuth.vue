@@ -1,12 +1,24 @@
 <template>
-  <form @submit="logIn">
+  <form @submit.prevent="logIn">
     <div class="form-control">
       <label for="email">E-mail</label>
-      <input type="email" id="email" />
+      <input
+        type="email"
+        id="email"
+        v-model.trim="formData.email"
+        :class="{ invalid: invalidFields.email }"
+        @focus="resetValidity('email')"
+      />
     </div>
     <div class="form-control">
       <label for="password">Password</label>
-      <input type="password" id="password" />
+      <input
+        type="password"
+        id="password"
+        v-model.trim="formData.password"
+        :class="{ invalid: invalidFields.password }"
+        @focus="resetValidity('password')"
+      />
     </div>
     <div class="form-control login-button">
       <base-button>Log in</base-button>
@@ -17,10 +29,47 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      formData: {
+        email: '',
+        password: '',
+      },
+      invalidFields: {
+        email: false,
+        password: false,
+      },
+    };
   },
   methods: {
-    logIn() {},
+    resetValidity(field) {
+      this.invalidFields[field] = false;
+    },
+    validateForm() {
+      this.invalidFields = {
+        email: false,
+        password: false,
+      };
+
+      if (!this.formData.email) {
+        this.invalidFields.email = true;
+      }
+
+      if (!this.formData.password) {
+        this.invalidFields.password = true;
+      }
+
+      return Object.values(this.invalidFields).every(
+        (field) => field === false
+      );
+    },
+    logIn() {
+      if (this.validateForm()) {
+        // Perform login action
+        console.log('Form submitted:', this.formData);
+      } else {
+        console.log('Validation failed');
+      }
+    },
   },
 };
 </script>
@@ -54,5 +103,22 @@ form {
 
 .login-button {
   justify-content: center;
+}
+
+.invalid {
+  animation: blink 0.5s ease-in-out forwards;
+}
+
+@keyframes blink {
+  0%,
+  66% {
+    border: solid 1px black;
+    background: transparent;
+  }
+  33%,
+  100% {
+    border: solid 1px red;
+    background: rgba(255, 0, 0, 0.1);
+  }
 }
 </style>
