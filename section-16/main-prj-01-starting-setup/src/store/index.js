@@ -52,6 +52,12 @@ const store = createStore({
     }
 
     console.log(response);
+
+    context.commit('SET_USER', {
+      token: responseData.IdToken,
+      userId: responseData.localId,
+      tokenExpiration: responseData.expiresIn,
+    });
   },
 });
 
