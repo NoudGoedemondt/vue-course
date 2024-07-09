@@ -30,7 +30,7 @@ form {
   outline: 1px solid lightgray;
   border-radius: 5px;
   padding: 1rem;
-  margin: 0.5rem auto;
+  margin: 1rem auto;
   width: 60vw;
   max-width: 768px;
   text-align: center;
