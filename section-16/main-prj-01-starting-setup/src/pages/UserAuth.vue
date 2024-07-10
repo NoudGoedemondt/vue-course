@@ -1,32 +1,35 @@
 <template>
-  <form @submit.prevent="submitForm">
-    <div class="form-control">
-      <label for="email">E-mail</label>
-      <input
-        type="email"
-        id="email"
-        v-model.trim="formData.email"
-        :class="{ invalid: invalidFields.email }"
-        @focus="resetValidity('email')"
-      />
-    </div>
-    <div class="form-control">
-      <label for="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        v-model.trim="formData.password"
-        :class="{ invalid: invalidFields.password }"
-        @focus="resetValidity('password')"
-      />
-    </div>
-    <div class="form-control login-button">
-      <base-button>{{ captions.button }}</base-button>
-    </div>
-    <div class="form-control signup-link">
-      <a @click="switchMode">{{ captions.link }}</a>
-    </div>
-  </form>
+  <div class="user-auth">
+    <base-spinner v-if="isLoading" />
+    <form @submit.prevent="submitForm" v-else>
+      <div class="form-control">
+        <label for="email">E-mail</label>
+        <input
+          type="email"
+          id="email"
+          v-model.trim="formData.email"
+          :class="{ invalid: invalidFields.email }"
+          @focus="resetValidity('email')"
+        />
+      </div>
+      <div class="form-control">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          v-model.trim="formData.password"
+          :class="{ invalid: invalidFields.password }"
+          @focus="resetValidity('password')"
+        />
+      </div>
+      <div class="form-control login-button">
+        <base-button>{{ captions.button }}</base-button>
+      </div>
+      <div class="form-control signup-link">
+        <a @click="switchMode">{{ captions.link }}</a>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -85,11 +88,20 @@ export default {
         return;
       }
 
-      if (this.mode === 'logIn') {
-        //execute login
-      } else {
-        await this.signUp({ ...this.formData });
+      this.isLoading = true;
+
+      try {
+        if (this.mode === 'logIn') {
+          //execute login
+        } else {
+          await this.signUp({ ...this.formData });
+        }
+      } catch (err) {
+        this.error = err.message || 'Failed to authenticate user!';
+        console.log(this.error);
       }
+
+      this.isLoading = false;
     },
     switchMode() {
       if (this.mode === 'logIn') {
@@ -103,7 +115,7 @@ export default {
 </script>
 
 <style scoped>
-form {
+.user-auth {
   outline: 1px solid lightgray;
   border-radius: 5px;
   padding: 1rem;
