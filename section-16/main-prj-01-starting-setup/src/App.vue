@@ -1,16 +1,4 @@
 <template>
-  <div class="test">
-    <label for="userId">enter userId</label>
-    <input
-      type="text"
-      id="userId"
-      ref="userIdInput"
-      @keyup.enter="changeUserId"
-    />
-    {{ userId }}
-    <button @click="clearCoaches">clear coaches</button>
-    <button @click="loadRequests">load requests</button>
-  </div>
   <the-header />
   <router-view v-slot="slotProps">
     <transition name="route" mode="out-in">
@@ -20,27 +8,11 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 import TheHeader from './components/UI/TheHeader.vue';
 
 export default {
   components: {
     TheHeader,
-  },
-  computed: {
-    ...mapState(['userId', 'requests', 'coaches']),
-  },
-  methods: {
-    changeUserId() {
-      const userId = this.$refs.userIdInput.value;
-      this.$store.dispatch('setUserId', userId);
-    },
-    loadRequests() {
-      this.$store.dispatch('getRequests');
-    },
-    clearCoaches() {
-      this.$store.commit('CLEAR_COACHES');
-    },
   },
 };
 </script>

@@ -18,9 +18,6 @@ const store = createStore({
     },
   },
   mutations: {
-    SET_USER_ID(state, coachId) {
-      state.userId = coachId;
-    },
     SET_USER(state, payload) {
       state.token = payload.token;
       state.userId = payload.userId;
@@ -29,9 +26,6 @@ const store = createStore({
     },
   },
   actions: {
-    setUserId(context, payload) {
-      context.commit('SET_USER_ID', payload);
-    },
     async signUp(context, payload) {
       const response = await fetch(
         'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBXwRPVa7jqldAFJhhnZpN874B6mLQds9U',
