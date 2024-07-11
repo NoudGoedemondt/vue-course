@@ -10,12 +10,12 @@
           <router-link to="/requests">Requests</router-link>
         </li>
         <li>
-          <router-link to="/login">Log in</router-link>
+          <router-link v-if="hasUserId" to="/register">Register</router-link>
         </li>
         <li>
-          <router-link v-if="!hasUserId" to="/register">Register</router-link>
-          <router-link v-else to="/register"
-            >Registered as {{ userEmail }}</router-link
+          <router-link v-if="!hasUserId" to="/login">Log in</router-link>
+          <router-link v-else to="/login"
+            >Logged in as: {{ userEmail }}</router-link
           >
         </li>
       </ul>
