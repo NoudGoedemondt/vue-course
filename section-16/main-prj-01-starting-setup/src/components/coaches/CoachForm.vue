@@ -92,7 +92,6 @@ export default {
   data() {
     return {
       coachRegistration: {
-        id: Date.now().toString(),
         firstName: '',
         lastName: '',
         areas: [],
@@ -150,8 +149,7 @@ export default {
       );
     },
     clearForm() {
-      (this.coachRegistration.id = ''),
-        (this.coachRegistration.firstName = ''),
+      (this.coachRegistration.firstName = ''),
         (this.coachRegistration.lastName = ''),
         (this.coachRegistration.areas = []),
         (this.coachRegistration.description = ''),

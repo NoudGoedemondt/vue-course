@@ -42,14 +42,14 @@ const coaches = {
   },
   actions: {
     async addCoach(context, coachData) {
-      const { id, ...coachDataWithoutId } = coachData;
+      const id = context.rootState.userId;
       const token = context.rootState.token;
 
       const response = await fetch(
         `https://vue-course-db-9d875-default-rtdb.europe-west1.firebasedatabase.app/coaches/${id}.json?auth=${token}`,
         {
           method: 'PUT',
-          body: JSON.stringify(coachDataWithoutId),
+          body: JSON.stringify(coachData),
         }
       );
 
@@ -57,8 +57,7 @@ const coaches = {
         //error
       }
 
-      context.commit('ADD_COACH', coachData);
-      context.commit('SET_USER_ID', coachData.id, { root: true });
+      context.commit('ADD_COACH', { id: id, ...coachData });
     },
     async getCoaches(context) {
       if (!context.getters.shouldUpdate) {
