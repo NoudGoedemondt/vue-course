@@ -48,6 +48,7 @@ const requests = {
     },
     async getRequests(context) {
       const registeredId = context.rootState.userId;
+      const token = context.rootState.token;
 
       if (!registeredId) {
         console.error('No user ID set');
@@ -55,7 +56,7 @@ const requests = {
       }
 
       const response = await fetch(
-        `https://vue-course-db-9d875-default-rtdb.europe-west1.firebasedatabase.app/requests/${registeredId}.json`
+        `https://vue-course-db-9d875-default-rtdb.europe-west1.firebasedatabase.app/requests/${registeredId}.json?auth=${token}`
       );
       const requestRecords = await response.json();
 

@@ -49,7 +49,7 @@ const store = createStore({
       }
 
       context.commit('SET_USER', {
-        token: responseData.IdToken,
+        token: responseData.idToken,
         userId: responseData.localId,
         email: responseData.email,
         tokenExpiration: responseData.expiresIn,
@@ -76,7 +76,7 @@ const store = createStore({
       }
 
       context.commit('SET_USER', {
-        token: responseData.IdToken,
+        token: responseData.idToken,
         userId: responseData.localId,
         email: responseData.email,
         tokenExpiration: responseData.expiresIn,

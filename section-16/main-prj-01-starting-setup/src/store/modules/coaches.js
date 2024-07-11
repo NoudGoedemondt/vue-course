@@ -43,9 +43,10 @@ const coaches = {
   actions: {
     async addCoach(context, coachData) {
       const { id, ...coachDataWithoutId } = coachData;
+      const token = context.rootState.token;
 
       const response = await fetch(
-        `https://vue-course-db-9d875-default-rtdb.europe-west1.firebasedatabase.app/coaches/${id}.json`,
+        `https://vue-course-db-9d875-default-rtdb.europe-west1.firebasedatabase.app/coaches/${id}.json?auth=${token}`,
         {
           method: 'PUT',
           body: JSON.stringify(coachDataWithoutId),
