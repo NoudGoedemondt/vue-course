@@ -84,6 +84,8 @@ export default {
     },
     ...mapActions(['signUp', 'logIn']),
     async submitForm() {
+      this.error = null;
+
       if (!this.validateForm()) {
         return;
       }
@@ -102,6 +104,10 @@ export default {
       }
 
       this.isLoading = false;
+
+      if (!this.error) {
+        this.$router.replace('/coaches');
+      }
     },
     switchMode() {
       if (this.mode === 'logIn') {

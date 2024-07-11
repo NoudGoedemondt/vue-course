@@ -3,20 +3,17 @@
     <h2><router-link to="/">Find a Coach</router-link></h2>
     <nav>
       <ul>
-        <li>
-          <router-link to="/coaches">Coaches</router-link>
-        </li>
-        <li>
+        <li><router-link to="/coaches">Coaches</router-link></li>
+        <li v-if="isAuthenticated">
           <router-link to="/requests">Requests</router-link>
         </li>
-        <li>
-          <router-link v-if="hasUserId" to="/register">Register</router-link>
+        <li v-if="isAuthenticated">
+          <router-link to="/register">Register</router-link>
         </li>
         <li>
-          <router-link v-if="!hasUserId" to="/login">Log in</router-link>
-          <router-link v-else to="/login"
-            >Logged in as: {{ userEmail }}</router-link
-          >
+          <router-link :to="isAuthenticated ? '/login' : '/login'">
+            {{ isAuthenticated ? `Logged in as: ${userEmail}` : 'Log in' }}
+          </router-link>
         </li>
       </ul>
     </nav>
@@ -28,7 +25,7 @@ import { mapGetters, mapState } from 'vuex';
 
 export default {
   computed: {
-    ...mapGetters(['hasUserId']),
+    ...mapGetters(['isAuthenticated']),
     ...mapState(['userEmail']),
   },
 };

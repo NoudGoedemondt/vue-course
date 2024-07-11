@@ -13,8 +13,8 @@ const store = createStore({
     };
   },
   getters: {
-    hasUserId(state) {
-      return state.userId && state.userId.length > 0;
+    isAuthenticated(state) {
+      return !!state.token;
     },
   },
   mutations: {
