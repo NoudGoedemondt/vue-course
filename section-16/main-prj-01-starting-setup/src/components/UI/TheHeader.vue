@@ -15,7 +15,7 @@
         <li>
           <router-link v-if="!hasUserId" to="/register">Register</router-link>
           <router-link v-else to="/register"
-            >Registered as {{ registeredUser.firstName }}</router-link
+            >Registered as {{ userEmail }}</router-link
           >
         </li>
       </ul>
@@ -28,11 +28,8 @@ import { mapGetters, mapState } from 'vuex';
 
 export default {
   computed: {
-    ...mapGetters(['hasUserId', 'getCoachById']),
-    ...mapState(['userId']),
-    registeredUser() {
-      return this.getCoachById(this.userId);
-    },
+    ...mapGetters(['hasUserId']),
+    ...mapState(['userEmail']),
   },
 };
 </script>

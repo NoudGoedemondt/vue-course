@@ -82,7 +82,7 @@ export default {
         (field) => field === false
       );
     },
-    ...mapActions(['signUp']),
+    ...mapActions(['signUp', 'logIn']),
     async submitForm() {
       if (!this.validateForm()) {
         return;
@@ -92,7 +92,7 @@ export default {
 
       try {
         if (this.mode === 'logIn') {
-          //execute login
+          await this.logIn({ ...this.formData });
         } else {
           await this.signUp({ ...this.formData });
         }
