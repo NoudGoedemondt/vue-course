@@ -82,6 +82,14 @@ const store = createStore({
         tokenExpiration: responseData.expiresIn,
       });
     },
+    logOut(context) {
+      context.commit('SET_USER', {
+        token: null,
+        userId: null,
+        email: null,
+        tokenExpiration: null,
+      });
+    },
   },
 });
 

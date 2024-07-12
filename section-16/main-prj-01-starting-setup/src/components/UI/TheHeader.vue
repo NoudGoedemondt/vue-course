@@ -15,18 +15,24 @@
             {{ isAuthenticated ? `Logged in as: ${userEmail}` : 'Log in' }}
           </router-link>
         </li>
+        <li v-if="isAuthenticated">
+          <base-button @click="logOut">Log Out</base-button>
+        </li>
       </ul>
     </nav>
   </header>
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex';
+import { mapGetters, mapState, mapActions } from 'vuex';
 
 export default {
   computed: {
     ...mapGetters(['isAuthenticated']),
     ...mapState(['userEmail']),
+  },
+  methods: {
+    ...mapActions(['logOut']),
   },
 };
 </script>
