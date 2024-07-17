@@ -1,17 +1,19 @@
 <template>
   <section class="container">
-    <h2>{{ name }}</h2>
+    <h2>{{ user.name }}</h2>
+    <h3>{{ user.age }}</h3>
+    <button @click="incrAge">Increment Age</button>
   </section>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { reactive } from 'vue';
 
-const name = ref('Maximilian');
+const user = reactive({ name: 'noud', age: 24 });
 
-setTimeout(() => {
-  name.value = 'Noud';
-}, 2000);
+const incrAge = () => {
+  user.age++;
+};
 </script>
 
 <style>
