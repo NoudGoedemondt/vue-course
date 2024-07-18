@@ -4,16 +4,34 @@
     <h3>{{ user.age }}</h3>
     <button @click="incrAge">Increment Age</button>
   </section>
+  <section class="container">
+    <h2>{{ fullName }}</h2>
+    <div>
+      <label for="firstName">First name</label>
+      <input type="text" id="firstName" v-model="firstName" />
+    </div>
+    <div>
+      <label for="lastName">Last name</label>
+      <input type="text" id="lastName" v-model="lastName" />
+    </div>
+  </section>
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import { reactive, ref, computed } from 'vue';
 
 const user = reactive({ name: 'noud', age: 24 });
+
+const firstName = ref('');
+const lastName = ref('');
 
 const incrAge = () => {
   user.age++;
 };
+
+const fullName = computed(() => {
+  return firstName.value + ' ' + lastName.value;
+});
 </script>
 
 <style>
