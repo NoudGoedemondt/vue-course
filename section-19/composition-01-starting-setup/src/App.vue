@@ -21,8 +21,8 @@ import TodoItem from './components/TodoItem.vue';
 
 const todos = ref([]);
 const newTodo = ref(null);
-
 let id = 1;
+
 const addTodo = () => {
   const todoText = newTodo.value.value.trim();
   if (!todoText) {
@@ -68,6 +68,7 @@ button {
   margin: 4px;
   cursor: pointer;
   border-radius: 12px;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {

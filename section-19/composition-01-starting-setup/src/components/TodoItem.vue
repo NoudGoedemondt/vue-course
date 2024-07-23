@@ -7,6 +7,7 @@
 
 <script setup>
 import { defineProps, defineEmits } from 'vue';
+
 defineProps(['todo', 'id']);
 defineEmits(['removeTodo']);
 </script>
