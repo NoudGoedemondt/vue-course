@@ -12,7 +12,8 @@
     </div>
     <div>
       <label for="lastName">Last name</label>
-      <input type="text" id="lastName" v-model="lastName" />
+      <input type="text" id="lastName" ref="lastNameInput" />
+      <button @click="setLastName">Set last name</button>
     </div>
   </section>
   <section class="container">
@@ -28,7 +29,9 @@ const user = reactive({ name: 'noud', age: 24 });
 const test = ref(10);
 
 const firstName = ref('');
+
 const lastName = ref('');
+const lastNameInput = ref(null);
 
 const incrAge = () => {
   user.age++;
@@ -42,6 +45,10 @@ watch(test, (newVal, oldVal) => {
   console.log(oldVal);
   console.log(newVal);
 });
+
+const setLastName = () => {
+  lastName.value = lastNameInput.value.value;
+};
 </script>
 
 <style>
