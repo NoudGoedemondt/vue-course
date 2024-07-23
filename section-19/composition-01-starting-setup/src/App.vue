@@ -15,12 +15,17 @@
       <input type="text" id="lastName" v-model="lastName" />
     </div>
   </section>
+  <section class="container">
+    <button @click="test++">incr</button>
+  </section>
 </template>
 
 <script setup>
-import { reactive, ref, computed } from 'vue';
+import { reactive, ref, computed, watch } from 'vue';
 
 const user = reactive({ name: 'noud', age: 24 });
+
+const test = ref(10);
 
 const firstName = ref('');
 const lastName = ref('');
@@ -31,6 +36,11 @@ const incrAge = () => {
 
 const fullName = computed(() => {
   return firstName.value + ' ' + lastName.value;
+});
+
+watch(test, (newVal, oldVal) => {
+  console.log(oldVal);
+  console.log(newVal);
 });
 </script>
 
