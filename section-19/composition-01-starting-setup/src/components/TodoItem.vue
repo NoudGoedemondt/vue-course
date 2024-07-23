@@ -1,6 +1,6 @@
 <template>
   <div class="todo-item">
-    <button @click="$emit('removeTodo', id)">X</button>
+    <button @click="$emit('remove-todo', id)">X</button>
     <p>{{ todo }}</p>
   </div>
 </template>
@@ -9,7 +9,7 @@
 import { defineProps, defineEmits } from 'vue';
 
 defineProps(['todo', 'id']);
-defineEmits(['removeTodo']);
+defineEmits(['remove-todo']);
 </script>
 
 <style scoped>
