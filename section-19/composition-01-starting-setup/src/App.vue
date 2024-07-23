@@ -29,7 +29,7 @@ const addTodo = () => {
     return;
   }
 
-  todos.value.push({ id: id, todo: newTodo.value.value });
+  todos.value.push({ id: id, todo: todoText });
   id++;
   newTodo.value.value = null;
 };
