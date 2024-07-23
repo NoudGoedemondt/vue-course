@@ -52,6 +52,23 @@ h3 {
   margin-bottom: 1rem;
 }
 
+button {
+  background-color: none;
+  border: none;
+  color: #272727;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  padding: 4px;
+  margin: 4px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+button:hover {
+  background-color: lightgray;
+}
+
 .container {
   margin: 3rem auto;
   max-width: 30rem;

@@ -1,7 +1,7 @@
 <template>
   <div class="todo-item">
-    <h4>{{ todo }}</h4>
     <button @click="$emit('removeTodo', id)">X</button>
+    <p>{{ todo }}</p>
   </div>
 </template>
 
@@ -12,13 +12,19 @@ defineEmits(['removeTodo']);
 </script>
 
 <style scoped>
-h4 {
+p {
   margin: 0.5rem;
 }
 
 .todo-item {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
+  margin: 4px 20%;
+}
+
+button {
+  border-radius: 100%;
+  padding: 0 3px;
 }
 </style>
