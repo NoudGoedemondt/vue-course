@@ -20,7 +20,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: left;
-  margin: 4px 20%;
+  margin: 4px 25%;
 }
 
 button {

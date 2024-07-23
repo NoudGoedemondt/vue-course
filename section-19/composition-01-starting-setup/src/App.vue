@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h3>To Do:</h3>
+    <h3>TO DO</h3>
     <todo-item
       v-for="todo in todos"
       :key="todo.id"
@@ -8,10 +8,10 @@
       :todo="todo.todo"
       @remove-todo="removeTodo"
     />
-    <div class="controls">
+    <form @submit.prevent="addTodo">
       <input type="text" ref="newTodo" />
-      <button @click="addTodo">Add To Do</button>
-    </div>
+      <button>Add</button>
+    </form>
   </div>
 </template>
 
@@ -24,6 +24,11 @@ const newTodo = ref(null);
 
 let id = 1;
 const addTodo = () => {
+  const todoText = newTodo.value.value.trim();
+  if (!todoText) {
+    return;
+  }
+
   todos.value.push({ id: id, todo: newTodo.value.value });
   id++;
   newTodo.value.value = null;
@@ -76,9 +81,5 @@ button:hover {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   padding: 1rem;
   text-align: center;
-}
-
-.controls {
-  margin-top: 1rem;
 }
 </style>
