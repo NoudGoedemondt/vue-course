@@ -1,53 +1,36 @@
 <template>
-  <section class="container">
-    <h2>{{ user.name }}</h2>
-    <h3>{{ user.age }}</h3>
-    <button @click="incrAge">Increment Age</button>
-  </section>
-  <section class="container">
-    <h2>{{ fullName }}</h2>
-    <div>
-      <label for="firstName">First name</label>
-      <input type="text" id="firstName" v-model="firstName" />
+  <div class="container">
+    <h3>To Do:</h3>
+    <todo-item
+      v-for="todo in todos"
+      :key="todo.id"
+      :id="todo.id"
+      :todo="todo.todo"
+      @remove-todo="removeTodo"
+    />
+    <div class="controls">
+      <input type="text" ref="newTodo" />
+      <button @click="addTodo">Add To Do</button>
     </div>
-    <div>
-      <label for="lastName">Last name</label>
-      <input type="text" id="lastName" ref="lastNameInput" />
-      <button @click="setLastName">Set last name</button>
-    </div>
-  </section>
-  <section class="container">
-    <button @click="test++">incr</button>
-  </section>
+  </div>
 </template>
 
 <script setup>
-import { reactive, ref, computed, watch } from 'vue';
+import { ref } from 'vue';
+import TodoItem from './components/TodoItem.vue';
 
-const user = reactive({ name: 'noud', age: 24 });
+const todos = ref([]);
+const newTodo = ref(null);
 
-const test = ref(10);
-
-const firstName = ref('');
-
-const lastName = ref('');
-const lastNameInput = ref(null);
-
-const incrAge = () => {
-  user.age++;
+let id = 1;
+const addTodo = () => {
+  todos.value.push({ id: id, todo: newTodo.value.value });
+  id++;
+  newTodo.value.value = null;
 };
 
-const fullName = computed(() => {
-  return firstName.value + ' ' + lastName.value;
-});
-
-watch(test, (newVal, oldVal) => {
-  console.log(oldVal);
-  console.log(newVal);
-});
-
-const setLastName = () => {
-  lastName.value = lastNameInput.value.value;
+const removeTodo = (id) => {
+  todos.value = todos.value.filter((todo) => todo.id !== id);
 };
 </script>
 
@@ -64,6 +47,11 @@ body {
   margin: 0;
 }
 
+h3 {
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
 .container {
   margin: 3rem auto;
   max-width: 30rem;
@@ -71,5 +59,9 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   padding: 1rem;
   text-align: center;
+}
+
+.controls {
+  margin-top: 1rem;
 }
 </style>
