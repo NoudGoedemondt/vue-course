@@ -11,11 +11,8 @@ import TodoList from './components/todo/TodoList.vue';
   box-sizing: border-box;
 }
 
-html {
-  font-family: sans-serif;
-}
-
 body {
   margin: 0;
+  font-family: sans-serif;
 }
 </style>

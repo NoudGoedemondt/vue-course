@@ -1,20 +1,20 @@
 <template>
   <div class="todo-item">
-    <button @click="$emit('remove-todo', id)">X</button>
-    <p>{{ todo }}</p>
+    <button @click="$emit('remove-todo', props.id)">X</button>
+    <p>{{ props.todo }}</p>
   </div>
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from 'vue';
+import { defineProps } from 'vue';
 
-defineProps(['todo', 'id']);
-defineEmits(['remove-todo']);
+const props = defineProps(['todo', 'id']);
 </script>
 
 <style scoped>
 p {
   margin: 0.5rem;
+  color: white;
 }
 
 .todo-item {

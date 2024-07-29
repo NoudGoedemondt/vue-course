@@ -1,17 +1,19 @@
 <template>
+  <form @submit.prevent="addTodo">
+    <input type="text" ref="newTodo" />
+    <button>Add</button>
+  </form>
   <div class="container">
-    <h3>TO DO</h3>
-    <todo-item
-      v-for="todo in todos"
-      :key="todo.id"
-      :id="todo.id"
-      :todo="todo.todo"
-      @remove-todo="removeTodo"
-    />
-    <form @submit.prevent="addTodo">
-      <input type="text" ref="newTodo" />
-      <button>Add</button>
-    </form>
+    <b>To Do</b>
+    <div class="content">
+      <todo-item
+        v-for="todo in todos"
+        :key="todo.id"
+        :id="todo.id"
+        :todo="todo.todo"
+        @remove-todo="removeTodo"
+      />
+    </div>
   </div>
 </template>
 
@@ -40,21 +42,27 @@ const removeTodo = (id) => {
 </script>
 
 <style scoped>
-* {
-  box-sizing: border-box;
-}
-
-html {
-  font-family: sans-serif;
-}
-
-body {
-  margin: 0;
-}
-
-h3 {
+b {
+  color: rgb(0, 255, 0);
   margin: 0;
   margin-bottom: 1rem;
+}
+
+.container {
+  background-color: black;
+  margin: 3rem auto;
+  height: 300px;
+  width: 300px;
+  max-width: 30rem;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 button {
@@ -73,14 +81,5 @@ button {
 
 button:hover {
   background-color: lightgray;
-}
-
-.container {
-  margin: 3rem auto;
-  max-width: 30rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  padding: 1rem;
-  text-align: center;
 }
 </style>
