@@ -3,9 +3,17 @@
     <input type="text" ref="newTodo" />
     <button>Add</button>
   </form>
-  <div class="container">
-    <b>To Do</b>
-    <div class="content">
+  <div class="widget">
+    <div class="head">
+      <div class="head-text">
+        <h3>{{ todoCount }}</h3>
+        <p>To-dos</p>
+      </div>
+      <svg class="icon">
+        <circle class="circle" cx="35" cy="35" r="35" fill="#51aaf2" />
+      </svg>
+    </div>
+    <div class="todos">
       <todo-item
         v-for="todo in todos"
         :key="todo.id"
@@ -18,12 +26,14 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import TodoItem from './TodoItem.vue';
 
 const todos = ref([]);
 const newTodo = ref(null);
 let id = 1;
+
+const todoCount = computed(() => todos.value.length);
 
 const addTodo = () => {
   const todoText = newTodo.value.value.trim();
@@ -42,44 +52,42 @@ const removeTodo = (id) => {
 </script>
 
 <style scoped>
-b {
-  color: rgb(0, 255, 0);
+/* * {
+  outline: red 1px auto;
+} */
+
+h3 {
+  color: white;
+  font-size: 60px;
+  font-weight: 200;
   margin: 0;
-  margin-bottom: 1rem;
 }
 
-.container {
-  background-color: black;
+p {
+  color: #51aaf2;
+  font-size: 24px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.widget {
+  background-color: #1c1c1c;
   margin: 3rem auto;
-  height: 300px;
-  width: 300px;
-  max-width: 30rem;
-  border-radius: 12px;
-  padding: 1rem;
-  text-align: center;
+  width: 676px;
+  height: 711px;
+  border-radius: 7%;
+  padding: 35px;
 }
 
-.content {
+.head {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: space-between;
 }
 
-button {
-  background-color: none;
-  border: none;
-  color: #272727;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  padding: 4px;
-  margin: 4px;
-  cursor: pointer;
-  border-radius: 12px;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: lightgray;
+.icon {
+  width: 70px;
+  height: 70px;
+  opacity: 50%;
 }
 </style>
