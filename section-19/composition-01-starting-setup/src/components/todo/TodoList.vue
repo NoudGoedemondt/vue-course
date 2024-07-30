@@ -52,10 +52,6 @@ const removeTodo = (id) => {
 </script>
 
 <style scoped>
-/* * {
-  outline: red 1px auto;
-} */
-
 h3 {
   color: white;
   font-size: 60px;

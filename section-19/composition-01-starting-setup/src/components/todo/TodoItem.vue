@@ -12,14 +12,13 @@ const props = defineProps(['todo', 'id']);
 </script>
 
 <style scoped>
-* {
-  outline: red 1px auto;
-}
-
 .todo-item {
   display: flex;
   align-items: center;
   justify-content: left;
+  border-bottom: 3px dotted #c6c6c8;
+  padding-bottom: 1.5rem;
+  padding-top: 0.5rem;
 }
 
 button {
@@ -42,7 +41,5 @@ p {
   font-size: 24px;
   margin-left: 1.5rem;
   width: 100%;
-  border-bottom: 3px dotted #c6c6c8;
-  margin-bottom: 2rem;
 }
 </style>
