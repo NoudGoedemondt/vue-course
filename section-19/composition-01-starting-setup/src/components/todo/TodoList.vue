@@ -6,14 +6,16 @@
   <div class="widget">
     <div class="head">
       <div class="head-text">
-        <h3>{{ todoCount }}</h3>
+        <transition name="fade" mode="out-in">
+          <h3 :key="todoCount">{{ todoCount }}</h3>
+        </transition>
         <p>To-dos</p>
       </div>
       <svg class="icon">
         <circle class="circle" cx="35" cy="35" r="35" fill="#51aaf2" />
       </svg>
     </div>
-    <div class="todos">
+    <transition-group name="fade" tag="div" class="todos">
       <todo-item
         v-for="todo in todos"
         :key="todo.id"
@@ -21,7 +23,7 @@
         :todo="todo.todo"
         @remove-todo="removeTodo"
       />
-    </div>
+    </transition-group>
   </div>
 </template>
 
@@ -88,5 +90,16 @@ p {
   width: 70px;
   height: 70px;
   opacity: 50%;
+}
+
+.fade-enter-active,
+.fade-leave-active,
+.fade-move {
+  transition: all 0.3s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
 }
 </style>
