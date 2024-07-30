@@ -25,59 +25,7 @@
   </base-container>
 </template>
 
-<script setup>
-import { defineProps, ref, computed, watch } from 'vue';
-import UserItem from './UserItem.vue';
-
-const props = defineProps(['users']);
-
-const enteredSearchTerm = ref('');
-const activeSearchTerm = ref('');
-const sorting = ref(null);
-
-watch(enteredSearchTerm, (value) => {
-  setTimeout(() => {
-    if (value === this.enteredSearchTerm) {
-      activeSearchTerm.value = value;
-    }
-  }, 300);
-});
-
-const availableUsers = computed(() => {
-  let users = [];
-  if (activeSearchTerm.value) {
-    users = props.users.filter((user) =>
-      user.fullName.includes(activeSearchTerm.value)
-    );
-  } else if (props.users) {
-    users = props.users;
-  }
-  return users;
-});
-
-const displayedUsers = computed(() => {
-  if (!sorting.value) {
-    return this.availableUsers;
-  }
-  return availableUsers.value.slice().sort((u1, u2) => {
-    if (sorting.value === 'asc' && u1.fullName > u2.fullName) {
-      return 1;
-    } else if (sorting.value === 'asc') {
-      return -1;
-    } else if (sorting.value === 'desc' && u1.fullName > u2.fullName) {
-      return -1;
-    } else {
-      return 1;
-    }
-  });
-});
-
-const updateSearch = (value) => (enteredSearchTerm.value = value);
-
-const sort = (mode) => (sorting.value = mode);
-</script>
-
-<!-- <script>
+<script>
 import UserItem from './UserItem.vue';
 
 export default {
@@ -91,6 +39,15 @@ export default {
       activeSearchTerm: '',
       sorting: null,
     };
+  },
+  watch: {
+    enteredSearchTerm(val) {
+      setTimeout(() => {
+        if (val === this.enteredSearchTerm) {
+          this.activeSearchTerm = val;
+        }
+      }, 300);
+    },
   },
   computed: {
     availableUsers() {
@@ -129,17 +86,8 @@ export default {
       this.sorting = mode;
     },
   },
-  watch: {
-    enteredSearchTerm(val) {
-      setTimeout(() => {
-        if (val === this.enteredSearchTerm) {
-          this.activeSearchTerm = val;
-        }
-      }, 300);
-    },
-  },
 };
-</script> -->
+</script>
 
 <style scoped>
 ul {
