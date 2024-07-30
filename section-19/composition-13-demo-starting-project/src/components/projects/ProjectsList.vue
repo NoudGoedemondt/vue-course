@@ -43,7 +43,7 @@ watch(userProp, () => (enteredSearchTerm.value = ''));
 const availableProjects = computed(() => {
   if (activeSearchTerm.value) {
     return props.user.projects.filter((prj) =>
-      prj.title.includes(this.activeSearchTerm)
+      prj.title.includes(activeSearchTerm.value)
     );
   }
   return props.user.projects;
