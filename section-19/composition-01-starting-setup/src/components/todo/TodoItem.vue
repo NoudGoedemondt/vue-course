@@ -12,10 +12,8 @@ const props = defineProps(['todo', 'id']);
 </script>
 
 <style scoped>
-p {
-  margin: 0.5rem;
-  color: white;
-  font-size: 24px;
+* {
+  outline: red 1px auto;
 }
 
 .todo-item {
@@ -25,21 +23,26 @@ p {
 }
 
 button {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   background-color: #1c1c1c;
-  border: 2px solid white;
-  color: #272727;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  padding: 0 3px;
+  border: 2px solid #c6c6c8;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: lightgray;
+  background-color: #c6c6c8;
+}
+
+p {
+  margin: 0.5rem;
+  color: white;
+  font-size: 24px;
+  margin-left: 1.5rem;
+  width: 100%;
+  border-bottom: 3px dotted #c6c6c8;
+  margin-bottom: 2rem;
 }
 </style>

@@ -83,6 +83,9 @@ p {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: 2rem;
+  margin-bottom: 1rem;
+  border-bottom: 3px #c6c6c8 solid;
 }
 
 .icon {
