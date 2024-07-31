@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h2>Add a products</h2>
+    <h2>Add a product</h2>
     <form @submit.prevent="submitForm">
       <div>
         <label for="title">Title</label>
@@ -12,40 +12,36 @@
       </div>
       <div>
         <label for="description">Description</label>
-        <textarea rows="5" id="description" v-model="enteredDescription"></textarea>
+        <textarea
+          rows="5"
+          id="description"
+          v-model="enteredDescription"
+        ></textarea>
       </div>
       <button>Add Product</button>
     </form>
   </section>
 </template>
 
-<script>
+<script setup>
 import { ref, inject } from 'vue';
+import { useRouter } from 'vue-router';
 
-export default {
-  setup() {
-    const addProduct = inject('addProduct');
+const addProduct = inject('addProduct');
+const router = useRouter();
 
-    const enteredTitle = ref('');
-    const enteredPrice = ref(null);
-    const enteredDescription = ref('');
+const enteredTitle = ref('');
+const enteredPrice = ref(null);
+const enteredDescription = ref('');
 
-    function submitForm() {
-      addProduct({
-        title: enteredTitle,
-        description: enteredDescription,
-        price: enteredPrice,
-      });
-    }
-
-    return {
-      enteredTitle,
-      enteredPrice,
-      enteredDescription,
-      submitForm,
-    };
-  },
-};
+function submitForm() {
+  addProduct({
+    title: enteredTitle,
+    description: enteredDescription,
+    price: enteredPrice,
+  });
+  router.push('/products');
+}
 </script>
 
 <style scoped>
