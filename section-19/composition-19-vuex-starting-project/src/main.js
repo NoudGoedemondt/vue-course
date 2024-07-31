@@ -6,24 +6,27 @@ import App from './App.vue';
 const store = createStore({
   state() {
     return {
-      counter: 0
-    }
+      counter: 0,
+    };
   },
   mutations: {
     increment(state) {
       state.counter++;
-    }
+    },
   },
   actions: {
     increment(context) {
       context.commit('increment');
-    }
+    },
   },
   getters: {
     counter(state) {
-      return state.counter
-    }
-  }
+      return state.counter;
+    },
+    double(state) {
+      return state.counter * 2;
+    },
+  },
 });
 
 const app = createApp(App);
