@@ -18,5 +18,5 @@ import UserAlert from './UserAlert.vue';
 
 const alertIsVisible = ref(false);
 
-const changeAlertVisibility = (value) => (alertIsVisible.value = value);
+const changeAlertVisibility = (isVisible) => (alertIsVisible.value = isVisible);
 </script>
