@@ -2,27 +2,22 @@
   <div class="backdrop" @click="closeDialog"></div>
   <dialog open>
     <header>
-      <h2>{{ title }}</h2>
+      <h2>{{ props.title }}</h2>
     </header>
     <div>
       <slot></slot>
     </div>
     <menu>
-      <button @click="closeDialog">Close</button>
+      <button @click="emits('close')">Close</button>
     </menu>
   </dialog>
 </template>
 
-<script>
-export default {
-  props: ['title'],
-  emits: ['close'],
-  methods: {
-    closeDialog() {
-      this.$emit('close');
-    },
-  },
-};
+<script setup>
+import { defineProps, defineEmits } from 'vue';
+
+const props = defineProps(['title']);
+const emits = defineEmits(['close']);
 </script>
 
 <style scoped>
