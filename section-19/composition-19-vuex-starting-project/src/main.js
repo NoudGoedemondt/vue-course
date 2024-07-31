@@ -20,9 +20,6 @@ const store = createStore({
     },
   },
   getters: {
-    counter(state) {
-      return state.counter;
-    },
     double(state) {
       return state.counter * 2;
     },
