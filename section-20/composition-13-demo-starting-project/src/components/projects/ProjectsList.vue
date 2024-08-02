@@ -21,11 +21,11 @@
 </template>
 
 <script setup>
-import { defineProps, ref, computed, watch } from 'vue';
+import { defineProps, ref, computed, watch, toRef } from 'vue';
 import ProjectItem from './ProjectItem.vue';
 
 const props = defineProps(['user']);
-const userProp = ref(props.user);
+const user = toRef(props, 'user');
 
 const enteredSearchTerm = ref('');
 const activeSearchTerm = ref('');
@@ -38,7 +38,7 @@ watch(enteredSearchTerm, (value) => {
   }, 300);
 });
 
-watch(userProp, () => (enteredSearchTerm.value = ''));
+watch(user, () => (enteredSearchTerm.value = ''));
 
 const availableProjects = computed(() => {
   if (activeSearchTerm.value) {
