@@ -1,8 +1,7 @@
 <template>
   <base-container v-if="props.user">
-    <h2>{{ props.user.fullName }}: Projects</h2>
+    <h2>{{ user.fullName }}: Projects</h2>
     <base-search
-      v-if="hasProjects"
       @search="updateSearch"
       :search-term="enteredSearchTerm"
     ></base-search>
@@ -42,15 +41,15 @@ watch(user, () => (enteredSearchTerm.value = ''));
 
 const availableProjects = computed(() => {
   if (activeSearchTerm.value) {
-    return props.user.projects.filter((prj) =>
-      prj.title.includes(activeSearchTerm.value)
+    return user.value.projects.filter((project) =>
+      project.title.includes(activeSearchTerm.value)
     );
   }
-  return props.user.projects;
+  return user.value.projects;
 });
 
 const hasProjects = computed(
-  () => props.user.projects && availableProjects.value.length > 0
+  () => user.value.projects && availableProjects.value.length > 0
 );
 
 const updateSearch = (value) => (enteredSearchTerm.value = value);
