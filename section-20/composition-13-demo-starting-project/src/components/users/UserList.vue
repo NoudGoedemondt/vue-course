@@ -39,7 +39,7 @@ const { enteredSearchTerm, availableItems, updateSearch } = useSearch(
   'fullName'
 );
 
-const { displayedUsers, sort, sorting } = useSort(availableItems);
+const { displayedUsers, sort, sorting } = useSort(availableItems, 'fullName');
 </script>
 
 <style scoped>
