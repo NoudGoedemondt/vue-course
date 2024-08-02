@@ -11,8 +11,8 @@ import USER_DATA from './dummy-data.js';
 import UserList from './components/users/UserList.vue';
 import ProjectsList from './components/projects/ProjectsList.vue';
 
-const selectedUser = ref(null);
 const activeUsers = ref(USER_DATA);
+const selectedUser = ref(null);
 
 const selectUser = (userId) =>
   (selectedUser.value = activeUsers.value.find((user) => user.id === userId));

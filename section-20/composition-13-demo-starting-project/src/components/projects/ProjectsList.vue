@@ -1,5 +1,5 @@
 <template>
-  <base-container v-if="props.user">
+  <base-container v-if="user">
     <h2>{{ user.fullName }}: Projects</h2>
     <base-search
       @search="updateSearch"
@@ -7,7 +7,7 @@
     ></base-search>
     <ul v-if="hasProjects">
       <project-item
-        v-for="prj in availableProjects"
+        v-for="prj in availableItems"
         :key="prj.id"
         :title="prj.title"
       ></project-item>
@@ -20,37 +20,23 @@
 </template>
 
 <script setup>
-import { defineProps, ref, computed, watch, toRef } from 'vue';
+import { defineProps, computed, toRef } from 'vue';
 import ProjectItem from './ProjectItem.vue';
+import useSearch from '../../hooks/search.js';
 
 const props = defineProps(['user']);
 const user = toRef(props, 'user');
 
-const enteredSearchTerm = ref('');
-const activeSearchTerm = ref('');
+const projects = computed(() => (user.value ? user.value.projects : []));
 
-watch(enteredSearchTerm, (value) => {
-  setTimeout(() => {
-    if (value === enteredSearchTerm.value) {
-      activeSearchTerm.value = value;
-    }
-  }, 300);
-});
-
-const availableProjects = computed(() => {
-  if (activeSearchTerm.value) {
-    return user.value.projects.filter((project) =>
-      project.title.includes(activeSearchTerm.value)
-    );
-  }
-  return user.value.projects;
-});
-
-const hasProjects = computed(
-  () => user.value.projects && availableProjects.value.length > 0
+const { enteredSearchTerm, availableItems, updateSearch } = useSearch(
+  projects,
+  'title'
 );
 
-const updateSearch = (value) => (enteredSearchTerm.value = value);
+const hasProjects = computed(
+  () => user.value.projects && availableItems.value.length > 0
+);
 </script>
 
 <style scoped>
