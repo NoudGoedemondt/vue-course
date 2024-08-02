@@ -37,8 +37,6 @@ watch(enteredSearchTerm, (value) => {
   }, 300);
 });
 
-watch(user, () => (enteredSearchTerm.value = ''));
-
 const availableProjects = computed(() => {
   if (activeSearchTerm.value) {
     return user.value.projects.filter((project) =>
